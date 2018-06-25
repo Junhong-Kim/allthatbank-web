@@ -1,23 +1,29 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <app-header/>
     <router-view/>
+    <app-footer/>
   </div>
 </template>
 
 <script>
+import AppHeader from '@/components/layout/Header'
+import AppFooter from '@/components/layout/Footer'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    AppHeader,
+    AppFooter
+  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.custom-container {
+  padding: 20px;
+  margin-top: 30px;
+  background-color: #42b883;
+  height: 1500px;
 }
 </style>
