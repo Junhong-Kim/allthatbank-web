@@ -1,10 +1,16 @@
 <template>
-  <div>은행검색(적금)</div>
+  <div>
+    <bank-grid/>
+  </div>
 </template>
 
 <script>
-export default {
+import BankGrid from '@/components/common/BankGrid'
 
+export default {
+  components: {
+    BankGrid
+  }
 }
 </script>
 
