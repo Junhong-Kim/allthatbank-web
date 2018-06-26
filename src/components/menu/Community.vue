@@ -1,10 +1,35 @@
 <template>
-  <div class="custom-container">커뮤니티</div>
+  <div class="custom-container">
+    <sub-menu :subMenus="subMenus"/>
+    <router-view/>
+  </div>
 </template>
 
 <script>
-export default {
+import SubMenu from '@/components/common/SubMenu'
 
+export default {
+  components: {
+    SubMenu
+  },
+  data () {
+    return {
+      subMenus: [
+        {
+          name: '공지사항',
+          route: '/community/notice'
+        },
+        {
+          name: '자유게시판',
+          route: '/community/freeBoard'
+        },
+        {
+          name: 'Q&A',
+          route: '/community/question'
+        }
+      ]
+    }
+  }
 }
 </script>
 

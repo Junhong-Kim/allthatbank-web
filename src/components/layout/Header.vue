@@ -1,14 +1,14 @@
 <template>
   <nav>
     <ul>
-      <router-link tag="li" active-class="active" to="/" exact>
+      <router-link tag="li" to="/" :style="{ cursor: 'pointer'}">
         <img class="brand-logo" src="../../assets/logo.png" v-text="appName">
         <span class="brand-name">{{appName}}</span>
       </router-link>
-      <router-link tag="li" active-class="active" to="/savingProduct"><a>적금</a></router-link>
-      <router-link tag="li" active-class="active" to="/depositProduct"><a>예금</a></router-link>
-      <router-link tag="li" active-class="active" to="/community"><a>커뮤니티</a></router-link>
-      <router-link tag="li" active-class="active" to="/login"><a>로그인</a></router-link>
+      <li><router-link to="/saving">적금</router-link></li>
+      <li><router-link to="/deposit">예금</router-link></li>
+      <li><router-link to="/community">커뮤니티</router-link></li>
+      <li><router-link to="/login">로그인</router-link></li>
     </ul>
   </nav>
 </template>
@@ -69,7 +69,7 @@ li a:hover {
   padding-right: 15px;
 }
 
-.router-link-exact-active {
+.router-link-active {
   background-color: #42b883;
 }
 </style>
