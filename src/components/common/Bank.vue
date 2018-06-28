@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     select (name) {
-      console.log(name)
+      this.$emit('select', name)
     }
   }
 }
@@ -26,13 +26,13 @@ export default {
 
 <style scoped>
 .box {
+  background: white;
   border: 1px solid #ddd;
   cursor: pointer;
 }
-
 .bank-image {
-  height: 30px;
-  padding: 5px;
-  width: 30px;
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
 }
 </style>

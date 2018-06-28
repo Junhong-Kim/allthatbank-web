@@ -1,11 +1,14 @@
 <template>
   <div class="container">
-    <div class="row row-centered">
-      <bank class="col-md-2 col-border"
-            v-for="(bank, index) in banks"
-            :key="index"
-            :bank="bank">
-      </bank>
+    <div class="bank-grid">
+      <div v-for="(bank, index) in banks" :key="index" >
+        <bank v-if="index === 9" class="bank-grid-item" :bank="bank" style="clear: both"
+              @select="select" :class="{active: selectBanks.includes(bank.name)}">
+        </bank>
+        <bank v-else class="bank-grid-item" :bank="bank"
+              @select="select" :class="{active: selectBanks.includes(bank.name)}">
+        </bank>
+      </div>
     </div>
   </div>
 </template>
@@ -20,6 +23,7 @@ export default {
   },
   data () {
     return {
+      selectBanks: [],
       banks: [
         {
           name: 'IBK기업은행',
@@ -78,23 +82,40 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    select (name) {
+      if (this.selectBanks.includes(name)) {
+        this.selectBanks.splice(this.selectBanks.indexOf(name), 1)
+      } else {
+        this.selectBanks.push(name)
+      }
+      console.log(this.selectBanks)
+    }
   }
 }
 </script>
 
 <style scoped>
-.row-centered {
-  background: white;
-  position: static;
+.bank-grid {
+  width: 990px;
+  height: 220px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.bank-grid-item {
+  width: 110px;
+  height: 110px;
+  float: left;
   text-align: center;
+  line-height: 50px;
 }
-
-.col-border {
-  position: static;
-}
-
-.col-border:hover {
+.bank-grid-item:hover {
   background: #35495e;
-  color: black;
+  color: white;
+}
+.active {
+  background: #35495e !important;
+  color: white;
 }
 </style>
