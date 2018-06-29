@@ -40,9 +40,9 @@ export default {
 .filter-box .title {
   color: white;
   font-size: 25px;
-  margin: 10px auto;
+  margin: auto;
+  width: 600px;
   text-align: center;
-  width: 1000px;
 }
 .filter-box .emphasis {
   color: #35495e;

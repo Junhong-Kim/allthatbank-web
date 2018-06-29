@@ -96,17 +96,13 @@ export default {
 
 <style scoped>
 .bank-grid {
-  width: 990px;
-  height: 220px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 900px;
+  margin: 10px auto;
 }
 .bank-grid-item {
-  width: 110px;
-  height: 110px;
+  width: 100px;
   float: left;
   text-align: center;
-  line-height: 50px;
 }
 .bank-grid-item:hover {
   background: #35495e;

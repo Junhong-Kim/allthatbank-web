@@ -1,7 +1,7 @@
 <template>
   <div @click="select(bank.name)" class="box">
     <img class="bank-image" :src="logo">
-    <div>{{bank.name}}</div>
+    <div class="bank-name">{{bank.name}}</div>
   </div>
 </template>
 
@@ -29,10 +29,14 @@ export default {
   background: white;
   border: 1px solid #ddd;
   cursor: pointer;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .bank-image {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+}
+.bank-name {
   margin-top: 10px;
+  font-size: 12px;
 }
 </style>

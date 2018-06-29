@@ -1,8 +1,10 @@
 <template>
   <div>
     <div class="filter-box">
-      <div class="title">은행별 <span class="emphasis">적금상품</span>을 모아보세요!</div>
-      <bank-grid/>
+      <div class="vertical-center">
+        <div class="title">은행별 <span class="emphasis">적금상품</span>을 모아보세요!</div>
+        <bank-grid/>
+      </div>
     </div>
     <contents/>
   </div>
@@ -21,5 +23,8 @@ export default {
 </script>
 
 <style scoped>
-
+.vertical-center {
+  position: relative;
+  top: 5%;
+}
 </style>
