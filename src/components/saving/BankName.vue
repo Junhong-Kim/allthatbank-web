@@ -1,7 +1,9 @@
 <template>
   <div>
-    <div class="title">은행별<span class="emphasis">적금상품</span>을 검색해보세요!</div>
-    <bank-grid/>
+    <div class="filter-box">
+      <div class="title">은행별 <span class="emphasis">적금상품</span>을 모아보세요!</div>
+      <bank-grid/>
+    </div>
     <contents/>
   </div>
 </template>
@@ -19,15 +21,5 @@ export default {
 </script>
 
 <style scoped>
-.title {
-  color: white;
-  font-size: 25px;
-  margin: 20px;
-  text-align: center;
-}
-.emphasis {
-  color: #35495e;
-  font-size: 30px;
-  font-weight: bold;
-}
+
 </style>

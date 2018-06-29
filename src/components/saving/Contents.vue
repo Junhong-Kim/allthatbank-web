@@ -26,7 +26,6 @@ export default {
 <style scoped>
 .product-container {
   background: #F9F9F9;
-  margin-top: 30px;
   padding-top: 20px;
   padding-bottom: 10px;
 }

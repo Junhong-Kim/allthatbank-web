@@ -1,14 +1,12 @@
 <template>
-  <div class="container">
-    <div class="bank-grid">
-      <div v-for="(bank, index) in banks" :key="index" >
-        <bank v-if="index === 9" class="bank-grid-item" :bank="bank" style="clear: both"
-              @select="select" :class="{active: selectBanks.includes(bank.name)}">
-        </bank>
-        <bank v-else class="bank-grid-item" :bank="bank"
-              @select="select" :class="{active: selectBanks.includes(bank.name)}">
-        </bank>
-      </div>
+  <div class="bank-grid">
+    <div v-for="(bank, index) in banks" :key="index" >
+      <bank v-if="index === 9" class="bank-grid-item" :bank="bank" style="clear: both"
+            @select="select" :class="{active: selectBanks.includes(bank.name)}">
+      </bank>
+      <bank v-else class="bank-grid-item" :bank="bank"
+            @select="select" :class="{active: selectBanks.includes(bank.name)}">
+      </bank>
     </div>
   </div>
 </template>
