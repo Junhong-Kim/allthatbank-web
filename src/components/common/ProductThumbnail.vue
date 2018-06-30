@@ -20,16 +20,16 @@
       <div class="vl"></div>
       <div>
         <div>
-          <span class="label">금리유형</span>
-          <span class="badge badge-primary">단리</span>
-          <span class="badge badge-secondary">복리</span>
-        </div>
-        <div>
           <span class="label">저축기간</span>
           <span class="badge badge-secondary">6개월</span>
           <span class="badge badge-primary">12개월</span>
           <span class="badge badge-primary">24개월</span>
           <span class="badge badge-secondary">36개월</span>
+        </div>
+        <div>
+          <span class="label">금리유형</span>
+          <span class="badge badge-primary">단리</span>
+          <span class="badge badge-secondary">복리</span>
         </div>
         <div>
           <span class="label">적립유형</span>

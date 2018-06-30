@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav style="position: relative; z-index: 10">
     <ul>
       <router-link tag="li" to="/" :style="{ cursor: 'pointer'}">
         <img class="brand-logo" src="../../assets/logo.png" v-text="appName">

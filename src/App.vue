@@ -21,8 +21,7 @@ export default {
 
 <style>
 .custom-container {
-  padding-top: 20px;
-  margin-top: 30px;
+  margin-top: 52px;
   background-color: #42b883;
 }
 </style>
