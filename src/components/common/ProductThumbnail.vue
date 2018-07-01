@@ -52,9 +52,12 @@ export default {
   name: 'ProductThumbnail',
   methods: {
     select () {
-      console.log('click')
+      this.$router.push({name: 'SavingProductDetail', params: { id: this.product }})
     }
-  }
+  },
+  props: [
+    'product'
+  ]
 }
 </script>
 

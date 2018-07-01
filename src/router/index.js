@@ -8,6 +8,7 @@ import Login from '@/components/menu/Login'
 import SavingBankName from '@/components/saving/BankName'
 import SavingProductName from '@/components/saving/ProductName'
 import SavingProductOption from '@/components/saving/ProductOption'
+import SavingProductDetail from '@/components/saving/ProductDetail'
 import DepositBankName from '@/components/deposit/BankName'
 import DepositProductName from '@/components/deposit/ProductName'
 import DepositProductOption from '@/components/deposit/ProductOption'
@@ -46,6 +47,11 @@ export default new Router({
           path: 'productOption',
           name: 'SavingProductOption',
           component: SavingProductOption
+        },
+        {
+          path: 'productDetail/:id',
+          name: 'SavingProductDetail',
+          component: SavingProductDetail
         }
       ]
     },
