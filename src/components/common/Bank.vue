@@ -1,7 +1,7 @@
 <template>
-  <div @click="select(bank.name)" class="box">
+  <div @click="select(bank.kor_co_nm)" class="box">
     <img class="bank-image" :src="logo">
-    <div class="bank-name">{{bank.name}}</div>
+    <div class="bank-name">{{bank.kor_co_nm}}</div>
   </div>
 </template>
 

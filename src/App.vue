@@ -9,12 +9,16 @@
 <script>
 import AppHeader from '@/components/layout/Header'
 import AppFooter from '@/components/layout/Footer'
+import Constant from './constant'
 
 export default {
   name: 'App',
   components: {
     AppHeader,
     AppFooter
+  },
+  created () {
+    this.$store.dispatch(Constant.SET_BANK_LIST)
   }
 }
 </script>

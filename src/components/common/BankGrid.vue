@@ -2,10 +2,10 @@
   <div class="bank-grid">
     <div v-for="(bank, index) in banks" :key="index" >
       <bank v-if="index === 9" class="bank-grid-item" :bank="bank" style="clear: both"
-            @select="select" :class="{active: selectBanks.includes(bank.name)}">
+            @select="select" :class="{active: selectBanks.includes(bank.kor_co_nm)}">
       </bank>
       <bank v-else class="bank-grid-item" :bank="bank"
-            @select="select" :class="{active: selectBanks.includes(bank.name)}">
+            @select="select" :class="{active: selectBanks.includes(bank.kor_co_nm)}">
       </bank>
     </div>
   </div>
@@ -22,63 +22,7 @@ export default {
   data () {
     return {
       selectBanks: [],
-      banks: [
-        {
-          name: 'IBK기업은행',
-          logo: 'logo.png'
-        }, {
-          name: 'KDB산업은행',
-          logo: 'logo.png'
-        }, {
-          name: 'KEB하나은행',
-          logo: 'logo.png'
-        }, {
-          name: 'SC제일은행',
-          logo: 'logo.png'
-        }, {
-          name: '경남은행',
-          logo: 'logo.png'
-        }, {
-          name: '광주은행',
-          logo: 'logo.png'
-        }, {
-          name: '국민은행',
-          logo: 'logo.png'
-        }, {
-          name: '농협은행',
-          logo: 'logo.png'
-        }, {
-          name: '대구은행',
-          logo: 'logo.png'
-        }, {
-          name: '부산은행',
-          logo: 'logo.png'
-        }, {
-          name: '수협은행',
-          logo: 'logo.png'
-        }, {
-          name: '신한은행',
-          logo: 'logo.png'
-        }, {
-          name: '씨티은행',
-          logo: 'logo.png'
-        }, {
-          name: '우리은행',
-          logo: 'logo.png'
-        }, {
-          name: '전북은행',
-          logo: 'logo.png'
-        }, {
-          name: '제주은행',
-          logo: 'logo.png'
-        }, {
-          name: '카카오뱅크',
-          logo: 'logo.png'
-        }, {
-          name: '케이뱅크',
-          logo: 'logo.png'
-        }
-      ]
+      banks: this.$store.state.bankList
     }
   },
   methods: {
