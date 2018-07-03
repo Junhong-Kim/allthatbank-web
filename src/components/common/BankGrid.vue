@@ -2,10 +2,10 @@
   <div class="bank-grid">
     <div v-for="(bank, index) in banks" :key="index" >
       <bank v-if="index === 9" class="bank-grid-item" :bank="bank" style="clear: both"
-            @select="select" :class="{active: selectBanks.includes(bank.kor_co_nm)}">
+            @select="select" :class="{active: selectBanks.includes(bank.fin_co_no)}">
       </bank>
       <bank v-else class="bank-grid-item" :bank="bank"
-            @select="select" :class="{active: selectBanks.includes(bank.kor_co_nm)}">
+            @select="select" :class="{active: selectBanks.includes(bank.fin_co_no)}">
       </bank>
     </div>
   </div>
@@ -13,24 +13,37 @@
 
 <script>
 import Bank from '@/components/common/Bank'
+import Constant from '../../constant'
 
 export default {
   name: 'BankGrid',
   components: {
     Bank
   },
+  updated () {
+    const payload = {
+      fin_co_nos: this.selectBanks
+    }
+    if (this.$store.state.selectBanks.length > 0) {
+      this.$store.dispatch(Constant.SET_SAVING_PRODUCT_LIST, payload)
+    }
+  },
   data () {
     return {
-      selectBanks: [],
       banks: this.$store.state.bankList
     }
   },
+  computed: {
+    selectBanks () {
+      return this.$store.state.selectBanks
+    }
+  },
   methods: {
-    select (name) {
-      if (this.selectBanks.includes(name)) {
-        this.selectBanks.splice(this.selectBanks.indexOf(name), 1)
+    select (finCoNo) {
+      if (this.selectBanks.includes(finCoNo)) {
+        this.selectBanks.splice(this.selectBanks.indexOf(finCoNo), 1)
       } else {
-        this.selectBanks.push(name)
+        this.$store.state.selectBanks.push(finCoNo)
       }
       console.log(this.selectBanks)
     }

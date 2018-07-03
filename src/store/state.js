@@ -1,3 +1,5 @@
 export default {
-  bankList: []
+  selectBanks: [],
+  bankList: [],
+  productList: []
 }

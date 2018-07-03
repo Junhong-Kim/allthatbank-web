@@ -1,7 +1,7 @@
 <template>
   <div class="product-container">
-    <product-sorting/>
-    <product-thumbnail v-for="(item, index) in items" :key="index" :product="item"/>
+    <product-sorting :products="products"/>
+    <product-thumbnail v-if="selectBanks.length > 0" v-for="(product, index) in products" :key="index" :product="product"/>
   </div>
 </template>
 
@@ -15,9 +15,12 @@ export default {
     ProductSorting,
     ProductThumbnail
   },
-  data () {
-    return {
-      items: [1, 2, 3, 4]
+  computed: {
+    selectBanks () {
+      return this.$store.state.selectBanks
+    },
+    products () {
+      return this.$store.state.productList
     }
   }
 }

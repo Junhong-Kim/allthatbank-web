@@ -1,5 +1,5 @@
 <template>
-  <div @click="select(bank.kor_co_nm)" class="box">
+  <div @click="select(bank.fin_co_no)" class="box">
     <img class="bank-image" :src="logo">
     <div class="bank-name">{{bank.kor_co_nm}}</div>
   </div>
@@ -17,8 +17,8 @@ export default {
     }
   },
   methods: {
-    select (name) {
-      this.$emit('select', name)
+    select (finCoNo) {
+      this.$emit('select', finCoNo)
     }
   }
 }

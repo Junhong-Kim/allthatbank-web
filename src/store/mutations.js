@@ -6,5 +6,8 @@ export default {
     state.bankList.forEach(bank => {
       bank.logo = 'logo.png'
     })
+  },
+  [Constant.SET_SAVING_PRODUCT_LIST]: (state, payload) => {
+    state.productList = payload.productList
   }
 }

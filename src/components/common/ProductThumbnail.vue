@@ -2,45 +2,45 @@
   <div class="product-thumbnail" @click="select">
     <div style="float: left; padding: 20px; text-align: center">
       <div><img class="logo" src="../../assets/logo.png"></div>
-      <div>우리은행</div>
+      <div>{{product.bank_name}}</div>
     </div>
     <div>
       <div style="float: left; margin-right: 50px">
-        <div class="join-way">영업점 | 인터넷 | 스마트폰</div>
-        <div style="font-size: 24px; font-weight: bold;">우리웰리치100적금</div>
+        <div class="join-way">{{product.join_way}}</div>
+        <div style="font-size: 24px; font-weight: bold;">{{product.product_name}}</div>
         <div>
           <span class="label" style="float: left; line-height: 24px">기본금리</span>
-          <span style="font-size: 14px;">1.5% ~ 1.7%</span>
+          <span style="font-size: 14px;">{{product.basic_rate_min}}% ~ {{product.basic_rate_max}}%</span>
         </div>
         <div>
           <span class="label" style="float: left; line-height: 24px">우대금리</span>
-          <span style="font-size: 14px;">1.7% ~ 1.9%</span>
+          <span style="font-size: 14px;">{{product.prime_rate_min}}% ~ {{product.prime_rate_max}}%</span>
         </div>
       </div>
       <div class="vl"></div>
       <div>
         <div>
           <span class="label">저축기간</span>
-          <span class="badge badge-secondary">6개월</span>
-          <span class="badge badge-primary">12개월</span>
-          <span class="badge badge-primary">24개월</span>
-          <span class="badge badge-secondary">36개월</span>
+          <span :class="[product.months_06 ? 'badge badge-primary' : 'badge badge-secondary']">6개월</span>
+          <span :class="[product.months_12 ? 'badge badge-primary' : 'badge badge-secondary']">12개월</span>
+          <span :class="[product.months_24 ? 'badge badge-primary' : 'badge badge-secondary']">24개월</span>
+          <span :class="[product.months_36 ? 'badge badge-primary' : 'badge badge-secondary']">36개월</span>
         </div>
         <div>
           <span class="label">금리유형</span>
-          <span class="badge badge-primary">단리</span>
-          <span class="badge badge-secondary">복리</span>
+          <span :class="[product.rate_type_s ? 'badge badge-primary' : 'badge badge-secondary']">단리</span>
+          <span :class="[product.rate_type_m ? 'badge badge-primary' : 'badge badge-secondary']">복리</span>
         </div>
         <div>
           <span class="label">적립유형</span>
-          <span class="badge badge-primary">자유적립식</span>
-          <span class="badge badge-secondary">정액적립식</span>
+          <span :class="[product.rsrv_type_s ? 'badge badge-primary' : 'badge badge-secondary']">자유적립식</span>
+          <span :class="[product.rsrv_type_f ? 'badge badge-primary' : 'badge badge-secondary']">정액적립식</span>
         </div>
         <div>
           <span class="label">가입제한</span>
-          <span class="badge badge-primary">제한없음</span>
-          <span class="badge badge-secondary">서민전용</span>
-          <span class="badge badge-secondary">일부제한</span>
+          <span :class="[product.join_deny === '1' ? 'badge badge-primary' : 'badge badge-secondary']">제한없음</span>
+          <span :class="[product.join_deny === '2' ? 'badge badge-primary' : 'badge badge-secondary']">서민전용</span>
+          <span :class="[product.join_deny === '3' ? 'badge badge-primary' : 'badge badge-secondary']">일부제한</span>
         </div>
       </div>
     </div>
