@@ -3,7 +3,7 @@
     <img class="search-icon" src="../../assets/logo.png">
     <input class="search-text" type="text" placeholder="상품 이름을 입력해주세요." style="width: 90%;"
            v-model="keyword"
-           @keyup.enter=search(keyword)>
+           @keypress.enter=search(keyword)>
     <i class="material-icons clear-icon" v-show="keyword.length > 0" @click="clear">cancel</i>
   </div>
 </template>
@@ -17,13 +17,13 @@ export default {
     }
   },
   methods: {
-    search (keyword) {
-      console.log(keyword)
-    },
     clear () {
       this.keyword = ''
     }
-  }
+  },
+  props: [
+    'search'
+  ]
 }
 </script>
 

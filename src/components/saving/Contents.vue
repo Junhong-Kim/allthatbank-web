@@ -1,7 +1,7 @@
 <template>
   <div class="product-container">
     <product-sorting :products="products"/>
-    <product-thumbnail v-if="selectBanks.length > 0" v-for="(product, index) in products" :key="index" :product="product"/>
+    <product-thumbnail v-if="products.length !== 0" v-for="(product, index) in products" :key="index" :product="product"/>
   </div>
 </template>
 

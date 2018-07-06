@@ -1,7 +1,7 @@
 <template>
   <div class="product-sorting">
     <div style="float: left; line-height: 40px">검색결과
-      <span v-if="selectBanks.length > 0" class="emphasis">{{products.length}}</span>
+      <span v-if="products.length > 0" class="emphasis">{{products.length}}</span>
       <span v-else class="emphasis">0</span>개
     </div>
     <div class="dropdown" style="position: absolute; right: 0;">

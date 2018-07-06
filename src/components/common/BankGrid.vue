@@ -45,6 +45,10 @@ export default {
       } else {
         this.$store.state.selectBanks.push(finCoNo)
       }
+      // 선택한 은행이 없을 때 상품 리스트 초기화
+      if (this.selectBanks.length === 0) {
+        this.$store.state.productList = []
+      }
       console.log(this.selectBanks)
     }
   }

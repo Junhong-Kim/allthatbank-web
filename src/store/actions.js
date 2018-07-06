@@ -28,12 +28,11 @@ export default {
         return qs.stringify(params, { indices: false })
       }
     }).then(res => {
-      const data = res.data
+      const data = res.data.data
       payload = {
-        productList: data.data
+        productList: data
       }
       store.commit(Constant.SET_SAVING_PRODUCT_LIST, payload)
-      console.log(data)
     })
   }
 }
