@@ -26,10 +26,30 @@ export default {
   },
   methods: {
     basicRate () {
-      console.log('기본금리')
+      const key = 'basic_rate_max'
+      this.sortByKey(key)
     },
     primeRate () {
-      console.log('우대금리')
+      const key = 'prime_rate_max'
+      this.sortByKey(key)
+    },
+    sortByKey (key) {
+      const productList = this.$store.state.productList
+      productList.sort(function (a, b) {
+        let keyA = a[key]
+        let keyB = b[key]
+
+        // keyA가 keyB보다 작을 때
+        if (keyA < keyB) {
+          return -1
+        }
+        // keyA가 keyB보다 클 때
+        if (keyA > keyB) {
+          return 1
+        }
+        // keyA와 keyB가 동일할 때
+        return 0
+      }).reverse()
     }
   },
   props: [
