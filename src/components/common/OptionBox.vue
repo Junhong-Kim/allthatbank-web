@@ -7,7 +7,7 @@
           <i class="material-icons" style="vertical-align: middle">keyboard_arrow_down</i>
         </span>
         <div class="dropdown-content" style="height: 200px">
-          <div v-for="(bank, index) in banks" :key="index" @click="setBank(bank.name)">{{bank.name}}</div>
+          <div v-for="(bank, index) in banks" :key="index" @click="setBank(bank)">{{bank.kor_co_nm}}</div>
         </div>
         <span class="sub-text">에서</span>
       </div>
@@ -25,7 +25,7 @@
         </div>
         <span class="sub-text">이고</span> <span class="main-text">적립유형</span><span class="sub-text">은</span>
         <!-- 적립유형 -->
-        <div class="badge-wrapper" v-for="(rsrvType, index) in ['자유적립식', '정액적립식']" :key="'rsrvType-' + index">
+        <div class="badge-wrapper" v-for="(rsrvType, index) in ['정액적립식', '자유적립식']" :key="'rsrvType-' + index">
           <span @click="setRsrvType(rsrvType)" :class="[selectRsrvType.includes(rsrvType) ? 'badge badge-primary' : 'badge badge-secondary']">{{rsrvType}}</span>
         </div>
         <span class="sub-text">중에서</span></div>
@@ -36,7 +36,7 @@
         <span class="main-text">우대금리</span> <input type="text" placeholder="0" min="0" max="99" v-model="primeRate"> 이상
       </div>
     </div>
-    <button class="btn search-button" @click="search">적금상품을 찾아주세요!</button>
+    <button class="btn search-button" @click="searchForSavingProducts">적금상품을 찾아주세요!</button>
   </div>
 </template>
 
@@ -45,112 +45,73 @@ export default {
   name: 'OptionBox',
   data () {
     return {
-      selectBank: '우리은행', // 은행명
-      selectPeriod: [], // 저축 기간
-      selectIntrType: [], // 저축 금리 유형 (S: 단리, M: 복리)
-      selectRsrvType: [], // 적립 유형 (S: 정액적립식, F: 자유적립식)
-      basicRate: 0, // 기본금리
-      primeRate: 0, // 우대금리
-      banks: [
-        {
-          name: 'IBK기업은행',
-          logo: 'logo.png'
-        }, {
-          name: 'KDB산업은행',
-          logo: 'logo.png'
-        }, {
-          name: 'KEB하나은행',
-          logo: 'logo.png'
-        }, {
-          name: 'SC제일은행',
-          logo: 'logo.png'
-        }, {
-          name: '경남은행',
-          logo: 'logo.png'
-        }, {
-          name: '광주은행',
-          logo: 'logo.png'
-        }, {
-          name: '국민은행',
-          logo: 'logo.png'
-        }, {
-          name: '농협은행',
-          logo: 'logo.png'
-        }, {
-          name: '대구은행',
-          logo: 'logo.png'
-        }, {
-          name: '부산은행',
-          logo: 'logo.png'
-        }, {
-          name: '수협은행',
-          logo: 'logo.png'
-        }, {
-          name: '신한은행',
-          logo: 'logo.png'
-        }, {
-          name: '씨티은행',
-          logo: 'logo.png'
-        }, {
-          name: '우리은행',
-          logo: 'logo.png'
-        }, {
-          name: '전북은행',
-          logo: 'logo.png'
-        }, {
-          name: '제주은행',
-          logo: 'logo.png'
-        }, {
-          name: '카카오뱅크',
-          logo: 'logo.png'
-        }, {
-          name: '케이뱅크',
-          logo: 'logo.png'
-        }
-      ]
+      // 은행명
+      selectBank: '우리은행',
+      selectBankCode: '0010001',
+      // 저축 기간
+      selectPeriod: [],
+      selectPeriodCodes: [],
+      // 저축 금리 유형 (S: 단리, M: 복리)
+      selectIntrType: [],
+      selectIntrTypeCodes: [],
+      // 적립 유형 (S: 정액적립식, F: 자유적립식)
+      selectRsrvType: [],
+      selectRsrvTypeCodes: [],
+      // 기본금리
+      basicRate: 0,
+      // 우대금리
+      primeRate: 0,
+      banks: this.$store.state.bankList
     }
   },
   methods: {
-    setBank (name) {
-      this.selectBank = name
+    setBank (bank) {
+      this.selectBank = bank.kor_co_nm
+      this.selectBankCode = bank.fin_co_no
     },
     setPeriod (period) {
       if (this.selectPeriod.includes(period)) {
         this.selectPeriod.splice(this.selectPeriod.indexOf(period), 1)
+        this.selectPeriodCodes.splice(period === '6개월' ? this.selectPeriodCodes.indexOf(period.substring(0, 1), 1) : this.selectPeriodCodes.indexOf(period.substring(0, 2), 1))
       } else {
         this.selectPeriod.push(period)
+        this.selectPeriodCodes.push(period === '6개월' ? period.substring(0, 1) : period.substring(0, 2))
       }
-      console.log(this.selectPeriod)
     },
     setIntrType (intrType) {
       if (this.selectIntrType.includes(intrType)) {
         this.selectIntrType.splice(this.selectIntrType.indexOf(intrType), 1)
+        this.selectIntrTypeCodes.splice(intrType === '단리' ? 'S' : 'M', 1)
       } else {
         this.selectIntrType.push(intrType)
+        this.selectIntrTypeCodes.push(intrType === '단리' ? 'S' : 'M')
       }
-      console.log(this.selectIntrType)
     },
     setRsrvType (rsrvType) {
       if (this.selectRsrvType.includes(rsrvType)) {
         this.selectRsrvType.splice(this.selectRsrvType.indexOf(rsrvType), 1)
+        this.selectRsrvTypeCodes.splice(rsrvType === '정액적립식' ? 'S' : 'F', 1)
       } else {
         this.selectRsrvType.push(rsrvType)
+        this.selectRsrvTypeCodes.push(rsrvType === '정액적립식' ? 'S' : 'F')
       }
-      console.log(this.selectRsrvType)
     },
-    search () {
+    searchForSavingProducts () {
       const self = this
-      let data = {
-        'selectBank': self.selectBank,
-        'selectPeriod': self.selectPeriod,
-        'selectIntrType': self.selectIntrType,
-        'selectRsrvType': self.selectRsrvType,
-        'basicRate': self.basicRate,
-        'primeRate': self.primeRate
+      let params = {
+        'fin_co_no': self.selectBankCode,
+        'save_trm': self.selectPeriodCodes,
+        'intr_rate_type': self.selectIntrTypeCodes,
+        'rsrv_type': self.selectRsrvTypeCodes,
+        'intr_rate': self.basicRate,
+        'intr_rate2': self.primeRate
       }
-      console.log(data)
+      self.search(params)
     }
-  }
+  },
+  props: [
+    'search'
+  ]
 }
 </script>
 

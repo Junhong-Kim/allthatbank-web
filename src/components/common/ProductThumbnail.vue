@@ -33,8 +33,8 @@
         </div>
         <div>
           <span class="label">적립유형</span>
-          <span :class="[product.rsrv_type_s ? 'badge badge-primary' : 'badge badge-secondary']">자유적립식</span>
-          <span :class="[product.rsrv_type_f ? 'badge badge-primary' : 'badge badge-secondary']">정액적립식</span>
+          <span :class="[product.rsrv_type_s ? 'badge badge-primary' : 'badge badge-secondary']">정액적립식</span>
+          <span :class="[product.rsrv_type_f ? 'badge badge-primary' : 'badge badge-secondary']">자유적립식</span>
         </div>
         <div>
           <span class="label">가입제한</span>
