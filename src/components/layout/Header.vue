@@ -6,9 +6,19 @@
         <span class="brand-name">{{appName}}</span>
       </router-link>
       <li><router-link to="/saving">적금</router-link></li>
-      <li><router-link to="/deposit">예금</router-link></li>
-      <li><router-link to="/community">커뮤니티</router-link></li>
-      <li><router-link to="/login">로그인</router-link></li>
+      <li>
+        <div style="position: relative;">
+          <div class="badge btn-danger prepare">준비중</div>
+          <router-link to="/deposit">예금</router-link>
+        </div>
+      </li>
+      <li>
+        <div style="position: relative;">
+          <div class="badge btn-danger prepare">준비중</div>
+          <router-link to="/community">커뮤니티</router-link>
+        </div>
+      </li>
+      <li v-show="false"><router-link to="/login">로그인</router-link></li>
     </ul>
   </nav>
 </template>
@@ -71,5 +81,9 @@ li a:hover {
 
 .router-link-active {
   background-color: #42b883;
+}
+.prepare {
+  position: absolute;
+  font-size: 8px;
 }
 </style>
