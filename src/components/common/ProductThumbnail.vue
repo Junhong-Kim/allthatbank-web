@@ -1,20 +1,20 @@
 <template>
   <div class="product-thumbnail" @click="select">
-    <div style="float: left; padding: 20px; text-align: center">
+    <div class="bank-wrap">
       <div><img class="logo" src="../../assets/logo.png"></div>
       <div>{{product.bank_name}}</div>
     </div>
     <div>
-      <div style="float: left; margin-right: 50px">
+      <div class="option-wrap">
         <div class="join-way">{{product.join_way}}</div>
-        <div style="font-size: 24px; font-weight: bold;">{{product.product_name}}</div>
+        <div class="product-name">{{product.product_name}}</div>
         <div>
-          <span class="label" style="float: left; line-height: 24px">기본금리</span>
-          <span style="font-size: 14px;">{{product.basic_rate_min}}% ~ {{product.basic_rate_max}}%</span>
+          <span class="label rate-title">기본금리</span>
+          <span class="rate-value">{{product.basic_rate_min}}% ~ {{product.basic_rate_max}}%</span>
         </div>
         <div>
-          <span class="label" style="float: left; line-height: 24px">우대금리</span>
-          <span style="font-size: 14px;">{{product.prime_rate_min}}% ~ {{product.prime_rate_max}}%</span>
+          <span class="label rate-title">우대금리</span>
+          <span class="rate-value">{{product.prime_rate_min}}% ~ {{product.prime_rate_max}}%</span>
         </div>
       </div>
       <div class="vl"></div>
@@ -62,6 +62,17 @@ export default {
 </script>
 
 <style scoped>
+.bank-wrap {
+  float: left;
+  padding: 15px;
+  margin-right: 5px;
+  text-align: center;
+}
+.option-wrap {
+  float: left;
+  margin-right: 50px;
+  width: 30%;
+}
 .product-thumbnail {
   background: white;
   border: 1px solid #42b883;
@@ -76,6 +87,17 @@ export default {
   background: #35495e;
   color: white;
   cursor: pointer;
+}
+.product-name {
+  font-size: 22px;
+  font-weight: bold;
+}
+.rate-title {
+  float: left;
+  line-height: 22px;
+}
+.rate-value {
+  font-size: 14px;
 }
 .join-way {
   color: #707070;
