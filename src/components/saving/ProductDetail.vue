@@ -3,84 +3,90 @@
     <div class="product-wrapper">
       <div class="title">상품 정보</div>
       <div class="detail">
-        <div class="join-way">영업점 | 인터넷 | 스마트폰</div>
-        <div class="product-name">우리웰리치100적금</div>
+        <div class="join-way">{{productJoinWay}}</div>
+        <div class="product-name">{{product['product_name']}}</div>
         <div>
           <span class="label">저축기간</span>
-          <span class="text">12개월</span>
-          <span class="text">24개월</span>
+          <span class="text">{{productPeriod}}</span>
         </div>
         <div>
           <span class="label">금리유형</span>
-          <span class="text">단리</span>
+          <span class="text">{{productRateType}}</span>
         </div>
         <div>
           <span class="label">적립유형</span>
-          <span class="text">자유적립식</span>
+          <span class="text">{{productRsrvType}}</span>
         </div>
         <div>
           <span class="label">최고한도</span>
-          <span class="text">3,000,000원</span>
+          <span class="text">{{productMaxLimit}}</span>
         </div>
         <div>
           <span class="label">상품금리</span><br>
-          <table>
+          <table v-if="isDataLoaded === true">
             <tr>
-              <th>가입기간</th>
-              <th>기본금리(%)</th>
-              <th>최고 우대금리(%)</th>
+              <th>금리유형</th>
+              <th>적립유형</th>
+              <th>금리</th>
+              <th>6개월</th>
+              <th>12개월</th>
+              <th>24개월</th>
+              <th>36개월</th>
             </tr>
             <tr>
-              <td>12개월</td>
-              <td>1.5</td>
-              <td>1.7</td>
+              <td rowspan="5">{{productRateType}}</td>
             </tr>
             <tr>
-              <td>24개월</td>
-              <td>1.6</td>
-              <td>1.8</td>
+              <td rowspan="2">정액적립식</td>
+              <td>기본(%)</td>
+              <td v-for="(month, index) in months" :key="'sb-' + index"
+                  v-text="productRsrvTypeS['basic_rate'][month] == null ? '-' : productRsrvTypeS['basic_rate'][month]">
+              </td>
             </tr>
             <tr>
-              <td>36개월</td>
-              <td>1.7</td>
-              <td>1.9</td>
+              <td>우대(%)</td>
+              <td v-for="(month, index) in months" :key="'sp-' + index"
+                  v-text="productRsrvTypeS['prime_rate'][month] == null ? '-' : productRsrvTypeS['prime_rate'][month]">
+              </td>
+            </tr>
+            <tr>
+              <td rowspan="2">자유적립식</td>
+              <td>기본(%)</td>
+              <td v-for="(month, index) in months" :key="'fb-' + index"
+                  v-text="productRsrvTypeF['basic_rate'][month] == null ? '-' : productRsrvTypeF['basic_rate'][month]">
+              </td>
+            </tr>
+            <tr>
+              <td>우대(%)</td>
+              <td v-for="(month, index) in months" :key="'fp-' + index"
+                  v-text="productRsrvTypeF['prime_rate'][month] == null ? '-' : productRsrvTypeF['prime_rate'][month]">
+              </td>
             </tr>
           </table>
           <br>
         </div>
         <div>
           <span class="label">우대조건</span><br>
-          <span class="text">
-            - 신규 시 아래항목 충족 시 최고 연0.2%p<br>
-            1. 연금이체 실적 보유 연 0.1%p<br>
-            2. 우리웰리치100연금통장에서 자동이체 연 0.1%p<br>
-            3. 우리신용/체크카드 보유 연0.1%p<br>
-            4. 인터넷/스마트뱅킹으로 가입 연0.1%p<br>
-          </span>
+          <span class="text">{{product['contents_prime_condition']}}</span>
         </div>
         <br>
         <div>
           <span class="label">만기 후 이자율</span><br>
-          <span class="text">
-            - 1개월이내 : 만기시점약정이율×50%<br>
-            - 1개월초과 6개월이내: 만기시점약정이율×30%<br>
-            - 6개월초과 : 만기시점약정이율×20%<br>
-            ※ 만기시점 약정이율 : 일반정기적금 금리<br>
-          </span>
+          <div class="text">{{product['contents_maturity_rate']}}</div>
         </div>
         <br>
         <div>
           <span class="label">기타 유의사항</span><br>
-          <span class="text">해당없음</span>
+          <span class="text">{{product['contents_etc']}}</span>
         </div>
         <br>
         <div>
           <span class="label">가입제한</span>
-          <span class="text">제한없음</span>
+          <span class="text">{{productJoinDeny}}</span>
         </div>
         <div>
           <span class="label">가입대상</span>
-          <span class="text">실명의 개인</span>
+          <span class="text">{{product['join_member']}}</span>
         </div>
       </div>
     </div>
@@ -88,8 +94,94 @@
 </template>
 
 <script>
+import {setComma} from '../../utils/common'
+
 export default {
-  name: 'ProductDetail'
+  name: 'ProductDetail',
+  created () {
+    const params = this.$route.params
+    if (params['productId'] === undefined) {
+      this.$router.push({name: 'Main'})
+    } else {
+      this.$http.get('/saving_products/' + params['productId'], {
+        params: {
+          fin_co_no: params['bankId']
+        }
+      }).then(res => {
+        this.product = res.data.data
+        this.isDataLoaded = true
+      })
+    }
+  },
+  data () {
+    return {
+      product: {},
+      months: ['months_6', 'months_12', 'months_24', 'months_36'],
+      isDataLoaded: false
+    }
+  },
+  computed: {
+    productJoinWay () {
+      const self = this
+      if (this.isDataLoaded === true) {
+        let joinWay = self.product['join_way'].split(',')
+        return joinWay.join(' | ')
+      }
+    },
+    productJoinDeny () {
+      const self = this
+      if (this.isDataLoaded === true) {
+        switch (self.product['join_deny']) {
+          case '1':
+            return '제한없음'
+          case '2':
+            return '서민전용'
+          case '3':
+            return '일부제한'
+        }
+      }
+    },
+    productPeriod () {
+      const self = this
+      if (this.isDataLoaded === true) {
+        let periods = []
+        self.product['options']['period'].forEach(period => {
+          periods.push(period + '개월 ')
+        })
+        return periods.join('')
+      }
+    },
+    productRateType () {
+      const self = this
+      if (this.isDataLoaded === true) {
+        return self.product['options']['rate_type'].join(' ')
+      }
+    },
+    productRsrvType () {
+      const self = this
+      if (this.isDataLoaded === true) {
+        return self.product['options']['rsrv_type'].join(' ')
+      }
+    },
+    productMaxLimit () {
+      const self = this
+      if (this.isDataLoaded === true) {
+        return self.product['max_limit'] === null ? '없음' : setComma(self.product['max_limit']) + '원'
+      }
+    },
+    productRsrvTypeS () {
+      const self = this
+      if (this.isDataLoaded === true) {
+        return self.product['options']['rsrv_type_s']
+      }
+    },
+    productRsrvTypeF () {
+      const self = this
+      if (this.isDataLoaded === true) {
+        return self.product['options']['rsrv_type_f']
+      }
+    }
+  }
 }
 </script>
 
@@ -134,14 +226,13 @@ export default {
 table {
   margin-left: 5px;
   margin-top: 5px;
-  width: 60%;
 }
 th {
   background: #eee;
   border: 1px solid #707070;
   color: black;
   text-align: center;
-  width: 20%;
+  width: 10%;
 }
 tr, td {
   color: #707070;

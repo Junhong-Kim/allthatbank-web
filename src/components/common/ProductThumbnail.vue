@@ -6,7 +6,7 @@
     </div>
     <div>
       <div class="option-wrap">
-        <div class="join-way">{{product.join_way}}</div>
+        <div class="join-way">{{productJoinWay}}</div>
         <div class="product-name">{{product.product_name}}</div>
         <div>
           <span class="label rate-title">기본금리</span>
@@ -21,7 +21,7 @@
       <div>
         <div>
           <span class="label">저축기간</span>
-          <span :class="[product.months_06 ? 'badge badge-primary' : 'badge badge-secondary']">6개월</span>
+          <span :class="[product.months_6 ? 'badge badge-primary' : 'badge badge-secondary']">6개월</span>
           <span :class="[product.months_12 ? 'badge badge-primary' : 'badge badge-secondary']">12개월</span>
           <span :class="[product.months_24 ? 'badge badge-primary' : 'badge badge-secondary']">24개월</span>
           <span :class="[product.months_36 ? 'badge badge-primary' : 'badge badge-secondary']">36개월</span>
@@ -50,14 +50,26 @@
 <script>
 export default {
   name: 'ProductThumbnail',
-  methods: {
-    select () {
-      this.$router.push({name: 'SavingProductDetail', params: { id: this.product }})
+  computed: {
+    productJoinWay () {
+      let joinWay = this.product['join_way'].split(',')
+      return joinWay.join(' | ')
     }
   },
-  props: [
-    'product'
-  ]
+  methods: {
+    select () {
+      this.$router.push({
+        name: 'SavingProductDetail',
+        params: {
+          productId: this.product['product_id'],
+          bankId: this.product['bank_id']
+        }
+      })
+    }
+  },
+  props: {
+    product: Object
+  }
 }
 </script>
 

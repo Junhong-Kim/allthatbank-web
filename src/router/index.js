@@ -49,7 +49,7 @@ export default new Router({
           component: SavingProductOption
         },
         {
-          path: 'productDetail/:id',
+          path: 'detail',
           name: 'SavingProductDetail',
           component: SavingProductDetail
         }
