@@ -30,7 +30,7 @@ export default {
       if (keyword === '') {
         alert('상품 이름을 입력해주세요.')
       } else {
-        this.$http.get('/saving_products/search', {
+        this.$http.get('/fss/saving_products/search', {
           params: {
             fin_prdt_nm: keyword
           }
