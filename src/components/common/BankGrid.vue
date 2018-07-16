@@ -30,7 +30,9 @@ export default {
   },
   data () {
     return {
-      banks: this.$store.state.bankList
+      banks: this.$store.state.bankList.sort(function (a, b) {
+        return a.kor_co_nm < b.kor_co_nm ? -1 : a.kor_co_nm > b.kor_co_nm ? 1 : 0
+      })
     }
   },
   computed: {

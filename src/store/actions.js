@@ -4,14 +4,13 @@ import qs from 'qs'
 
 export default {
   [Constant.SET_BANK_LIST]: (store, payload) => {
-    axios.get('/company', {
+    axios.get('/fss/companies', {
       params: {
-        top_fin_grp_no: '020000',
-        offset: 1,
-        limit: 20
+        topFinGrpNo: '020000',
+        page: 1
       }
     }).then(res => {
-      const data = res.data.data
+      const data = res.data.result.baseList
       payload = {
         bankList: data
       }
