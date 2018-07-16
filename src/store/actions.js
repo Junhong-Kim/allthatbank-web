@@ -6,8 +6,8 @@ export default {
   [Constant.SET_BANK_LIST]: (store, payload) => {
     axios.get('/fss/companies', {
       params: {
-        topFinGrpNo: '020000',
-        page: 1
+        top_fin_grp_No: '020000',
+        page_no: 1
       }
     }).then(res => {
       const data = res.data.data
@@ -18,10 +18,9 @@ export default {
     })
   },
   [Constant.SET_SAVING_PRODUCT_LIST]: (store, payload) => {
-    axios.get('/saving_products', {
+    axios.get('/fss/saving_products', {
       params: {
-        fin_co_no: payload.fin_co_nos,
-        limit: 1000
+        fin_co_no: payload.fin_co_nos
       },
       paramsSerializer: function (params) {
         return qs.stringify(params, { indices: false })
