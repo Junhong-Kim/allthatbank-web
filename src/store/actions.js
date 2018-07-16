@@ -10,7 +10,7 @@ export default {
         page: 1
       }
     }).then(res => {
-      const data = res.data.result.baseList
+      const data = res.data.data
       payload = {
         bankList: data
       }
