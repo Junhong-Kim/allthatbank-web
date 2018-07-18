@@ -14,19 +14,19 @@
       <div>
         <!-- 저축기간 -->
         <div class="badge-wrapper" v-for="(period, index) in ['6개월', '12개월', '24개월', '36개월']" :key="'period-' + index" style="">
-          <span @click="setPeriod(period)" :class="[selectPeriod.includes(period) ? 'badge badge-primary' : 'badge badge-secondary']">{{period}}</span>
+          <span @click="setPeriod(period)" :class="[selectPeriod === period ? 'badge badge-primary' : 'badge badge-secondary']">{{period}}</span>
         </div>
         <span class="main-text">동안</span> <span class="sub-text">저축할 거예요</span></div>
       <div>
         <span class="main-text">저축금리</span><span class="sub-text">가</span>
         <!-- 금리유형 -->
         <div class="badge-wrapper" v-for="(intrType, index) in ['단리', '복리']" :key="'intrType-' + index">
-          <span @click="setIntrType(intrType)" :class="[selectIntrType.includes(intrType) ? 'badge badge-primary' : 'badge badge-secondary']">{{intrType}}</span>
+          <span @click="setIntrType(intrType)" :class="[selectIntrType === intrType ? 'badge badge-primary' : 'badge badge-secondary']">{{intrType}}</span>
         </div>
         <span class="sub-text">이고</span> <span class="main-text">적립유형</span><span class="sub-text">은</span>
         <!-- 적립유형 -->
         <div class="badge-wrapper" v-for="(rsrvType, index) in ['정액적립식', '자유적립식']" :key="'rsrvType-' + index">
-          <span @click="setRsrvType(rsrvType)" :class="[selectRsrvType.includes(rsrvType) ? 'badge badge-primary' : 'badge badge-secondary']">{{rsrvType}}</span>
+          <span @click="setRsrvType(rsrvType)" :class="[selectRsrvType === rsrvType ? 'badge badge-primary' : 'badge badge-secondary']">{{rsrvType}}</span>
         </div>
         <span class="sub-text">중에서</span></div>
       <div>
@@ -49,14 +49,14 @@ export default {
       selectBank: '우리은행',
       selectBankCode: '0010001',
       // 저축 기간
-      selectPeriod: [],
-      selectPeriodCodes: [],
+      selectPeriod: null,
+      selectPeriodCode: null,
       // 저축 금리 유형 (S: 단리, M: 복리)
-      selectIntrType: [],
-      selectIntrTypeCodes: [],
+      selectIntrType: null,
+      selectIntrTypeCode: null,
       // 적립 유형 (S: 정액적립식, F: 자유적립식)
       selectRsrvType: [],
-      selectRsrvTypeCodes: [],
+      selectRsrvTypeCode: [],
       // 기본금리
       basicRate: 0,
       // 우대금리
@@ -70,39 +70,39 @@ export default {
       this.selectBankCode = bank.fin_co_no
     },
     setPeriod (period) {
-      if (this.selectPeriod.includes(period)) {
-        this.selectPeriod.splice(this.selectPeriod.indexOf(period), 1)
-        this.selectPeriodCodes.splice(period === '6개월' ? this.selectPeriodCodes.indexOf(period.substring(0, 1), 1) : this.selectPeriodCodes.indexOf(period.substring(0, 2), 1))
+      if (this.selectPeriod === period) {
+        this.selectPeriod = null
+        this.selectPeriodCode = null
       } else {
-        this.selectPeriod.push(period)
-        this.selectPeriodCodes.push(period === '6개월' ? period.substring(0, 1) : period.substring(0, 2))
+        this.selectPeriod = period
+        this.selectPeriodCode = period === '6개월' ? period.substring(0, 1) : period.substring(0, 2)
       }
     },
     setIntrType (intrType) {
-      if (this.selectIntrType.includes(intrType)) {
-        this.selectIntrType.splice(this.selectIntrType.indexOf(intrType), 1)
-        this.selectIntrTypeCodes.splice(intrType === '단리' ? 'S' : 'M', 1)
+      if (this.selectIntrType === intrType) {
+        this.selectIntrType = null
+        this.selectIntrTypeCode = null
       } else {
-        this.selectIntrType.push(intrType)
-        this.selectIntrTypeCodes.push(intrType === '단리' ? 'S' : 'M')
+        this.selectIntrType = intrType
+        this.selectIntrTypeCode = intrType === '단리' ? 'S' : 'M'
       }
     },
     setRsrvType (rsrvType) {
-      if (this.selectRsrvType.includes(rsrvType)) {
-        this.selectRsrvType.splice(this.selectRsrvType.indexOf(rsrvType), 1)
-        this.selectRsrvTypeCodes.splice(rsrvType === '정액적립식' ? 'S' : 'F', 1)
+      if (this.selectRsrvType === rsrvType) {
+        this.selectRsrvType = null
+        this.selectRsrvTypeCode = null
       } else {
-        this.selectRsrvType.push(rsrvType)
-        this.selectRsrvTypeCodes.push(rsrvType === '정액적립식' ? 'S' : 'F')
+        this.selectRsrvType = rsrvType
+        this.selectRsrvTypeCode = rsrvType === '정액적립식' ? 'S' : 'F'
       }
     },
     searchForSavingProducts () {
       const self = this
       let params = {
         'fin_co_no': self.selectBankCode,
-        'save_trm': self.selectPeriodCodes,
-        'intr_rate_type': self.selectIntrTypeCodes,
-        'rsrv_type': self.selectRsrvTypeCodes,
+        'save_trm': self.selectPeriodCode,
+        'intr_rate_type': self.selectIntrTypeCode,
+        'rsrv_type': self.selectRsrvTypeCode,
         'intr_rate': self.basicRate,
         'intr_rate2': self.primeRate
       }
