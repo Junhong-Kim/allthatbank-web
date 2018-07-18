@@ -103,7 +103,7 @@ export default {
     if (params['productId'] === undefined) {
       this.$router.push({name: 'Main'})
     } else {
-      this.$http.get('/saving_products/' + params['productId'], {
+      this.$http.get('/fss/saving_products/' + params['productId'], {
         params: {
           fin_co_no: params['bankId']
         }
