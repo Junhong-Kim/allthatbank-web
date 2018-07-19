@@ -1,6 +1,6 @@
 <template>
   <div style="background: #f9f9f9; padding-bottom: 30px;">
-    <div class="product-wrapper">
+    <div v-if="isDataLoaded" class="product-wrapper">
       <div class="title">상품 정보</div>
       <div class="detail">
         <div class="join-way">{{productJoinWay}}</div>
@@ -90,14 +90,21 @@
         </div>
       </div>
     </div>
+    <div v-else class="spinner-wrapper">
+      <loading-spinner/>
+    </div>
   </div>
 </template>
 
 <script>
 import {setComma} from '../../utils/common'
+import LoadingSpinner from '@/components/common/LoadingSpinner'
 
 export default {
   name: 'ProductDetail',
+  components: {
+    LoadingSpinner
+  },
   created () {
     const params = this.$route.params
     if (params['productId'] === undefined) {
@@ -238,5 +245,10 @@ tr, td {
   color: #707070;
   border: 1px solid #707070;
   text-align: center;
+}
+.spinner-wrapper {
+  width: 70px;
+  padding-top: 40px;
+  margin: 0 auto;
 }
 </style>
