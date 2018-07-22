@@ -1,23 +1,31 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <app-header/>
     <router-view/>
+    <app-footer/>
   </div>
 </template>
 
 <script>
+import AppHeader from '@/components/layout/Header'
+import AppFooter from '@/components/layout/Footer'
+import Constant from './constant'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    AppHeader,
+    AppFooter
+  },
+  created () {
+    this.$store.dispatch(Constant.SET_BANK_LIST)
+  }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.custom-container {
+  margin-top: 52px;
+  background-color: #42b883;
 }
 </style>
