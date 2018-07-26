@@ -18,7 +18,7 @@
           <router-link to="/community">커뮤니티</router-link>
         </div>
       </li>
-      <li v-show="false"><router-link to="/login">로그인</router-link></li>
+      <li><router-link to="/login">로그인</router-link></li>
     </ul>
   </nav>
 </template>
