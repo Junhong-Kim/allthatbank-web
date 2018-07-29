@@ -42,22 +42,46 @@ export default {
       FB.login(res => {
         self.statusChangeCallback(res)
       }, {
-        scope: 'public_profile, email, user_birthday, user_gender'
+        scope: 'public_profile, email'
       })
     },
     statusChangeCallback (res) {
       const status = res.status
       if (status === 'connected') {
-        console.log('Login success', res)
-        this.setFbAccountInfoAPI()
+        const fbAccessToken = res.authResponse.accessToken
+        this.debugToken(fbAccessToken)
       } else {
         console.log('Login fail')
       }
     },
-    setFbAccountInfoAPI () {
+    debugToken (fbAccessToken) {
       const self = this
-      FB.api('/me?fields=email,birthday,gender,picture', res => {
-        console.log(res)
+      this.$http.post('/users/debug_token/fb', {
+        token: fbAccessToken
+      }).then(res => {
+        const data = res.data.data
+        if (data === null) {
+          this.createUser(fbAccessToken)
+        } else {
+          self.$router.push({name: 'Main'})
+        }
+      })
+    },
+    createUser (fbAccessToken) {
+      const self = this
+      FB.api('/me?fields=email,name,picture', res => {
+        self.$http.post('/users/', {
+          email: res.email,
+          nickname: res.name,
+          picture_url: res.picture.data.url,
+          sns_type: 'facebook',
+          sns_id: res.id,
+          sns_access_token: fbAccessToken
+        }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        })
         self.$router.push({name: 'Main'})
       })
     }
