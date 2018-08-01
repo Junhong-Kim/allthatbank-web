@@ -1,11 +1,29 @@
 <template>
   <div>
     <div class="custom-container title">Login</div>
-    <div class="container">
-      <div class="box">
-        <button class="btn btn-primary" @click="fbLogin()">페이스북으로 로그인하기</button>
+      <div class="container">
+        <div class="centered">
+          <div class="btn-fb" @click="fbLogin()">
+            <img class="img" :src="fbImg">
+            <div class="text">Facebook으로 로그인하기</div>
+          </div>
+          <div style="text-align: center; margin: 20px 0;">또는</div>
+          <form>
+            <div class="form-group">
+              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="아이디(이메일)">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="비밀번호">
+            </div>
+            <button class="btn btn-success" style="width: 100%;">로그인</button>
+          </form>
+          <div style="text-align: center; margin: 10px 0;">
+            <span style="cursor: pointer;">비밀번호 찾기</span>
+            <span> | </span>
+            <span style="cursor: pointer;">회원가입</span>
+          </div>
+        </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -14,6 +32,11 @@
 export default {
   created () {
     this.fbInit()
+  },
+  data () {
+    return {
+      fbImg: require('../../assets/facebook.png')
+    }
   },
   methods: {
     fbInit () {
@@ -25,9 +48,9 @@ export default {
           xfbml      : true,
           version    : 'v3.0'
         });
-        FB.getLoginStatus(function(response) {
-          self.statusChangeCallback(response);
-        });
+        // FB.getLoginStatus(function(response) {
+        //   self.statusChangeCallback(response);
+        // });
       };
       (function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -90,6 +113,10 @@ export default {
 </script>
 
 <style scoped>
+span {
+  color: #777777;
+  font-size: 8px;
+}
 .title {
   color: white;
   padding: 15px;
@@ -97,17 +124,31 @@ export default {
   text-align: center;
 }
 .container {
-  padding: 0;
-  border: 1px solid red;
-  height: calc(100vh - 235px);
-  width: 33%;
-  margin: 0 auto;
-  text-align: center;
+  border: 1px solid black;
+  box-shadow: 5px 10px #EAEAEA;
+  height: calc(100vh - 435px);
+  width: 25%;
+  margin: 100px auto;
+  padding: 20px;
 }
-.container > .box {
-  border: 1px solid blue;
+.centered {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+.btn-fb {
+  background: #3b5998;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+.btn-fb > .img {
+  float: left;
+  width: 25px;
+}
+.btn-fb > .text {
+  text-align: center;
 }
 </style>
