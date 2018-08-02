@@ -5,6 +5,8 @@ import SavingProduct from '@/components/menu/SavingProduct'
 import DepositProduct from '@/components/menu/DepositProduct'
 import Community from '@/components/menu/Community'
 import Login from '@/components/menu/Login'
+import SignIn from '@/components/sign/SignIn'
+import SignUp from '@/components/sign/SignUp'
 import SavingBankName from '@/components/saving/BankName'
 import SavingProductName from '@/components/saving/ProductName'
 import SavingProductOption from '@/components/saving/ProductOption'
@@ -108,7 +110,22 @@ export default new Router({
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      redirect: {
+        name: 'SignIn'
+      },
+      children: [
+        {
+          path: 'signin',
+          name: 'SignIn',
+          component: SignIn
+        },
+        {
+          path: 'signup',
+          name: 'SignUp',
+          component: SignUp
+        }
+      ]
     }
   ]
 })
