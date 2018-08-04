@@ -7,6 +7,7 @@ import Community from '@/components/menu/Community'
 import Login from '@/components/menu/Login'
 import SignIn from '@/components/sign/SignIn'
 import SignUp from '@/components/sign/SignUp'
+import FindPassword from '@/components/sign/FindPassword'
 import SavingBankName from '@/components/saving/BankName'
 import SavingProductName from '@/components/saving/ProductName'
 import SavingProductOption from '@/components/saving/ProductOption'
@@ -124,6 +125,11 @@ export default new Router({
           path: 'signup',
           name: 'SignUp',
           component: SignUp
+        },
+        {
+          path: 'findPassword',
+          name: 'FindPassword',
+          component: FindPassword
         }
       ]
     }

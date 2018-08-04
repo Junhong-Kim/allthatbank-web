@@ -16,7 +16,7 @@
       <button class="btn btn-success" style="width: 100%;">회원가입</button>
     </form>
     <div style="text-align: center; margin: 10px 0;">
-      <span style="cursor: pointer;">비밀번호 찾기</span>
+      <router-link :to="{name: 'FindPassword'}" tag="span" style="cursor: pointer;">비밀번호 찾기</router-link>
       <span> | </span>
       <router-link :to="{name: 'SignIn'}" tag="span" style="cursor: pointer;">로그인</router-link>
     </div>
