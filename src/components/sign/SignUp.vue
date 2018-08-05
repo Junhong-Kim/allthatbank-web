@@ -2,18 +2,18 @@
   <div>
     <form>
       <div class="form-group">
-        <input type="text" class="form-control" id="nickname" placeholder="닉네임">
+        <input type="text" class="form-control" id="nickname" placeholder="닉네임" v-model="nickname">
       </div>
       <div class="form-group">
-        <input type="email" class="form-control" id="username" placeholder="아이디(이메일)">
+        <input type="email" class="form-control" id="username" placeholder="아이디(이메일)" v-model="username">
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" id="password" placeholder="비밀번호">
+        <input type="password" class="form-control" id="password" placeholder="비밀번호" v-model="password">
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" id="passwordCheck" placeholder="비밀번호 확인">
+        <input type="password" class="form-control" id="passwordCheck" placeholder="비밀번호 확인" v-model="passwordCheck">
       </div>
-      <button class="btn btn-success" style="width: 100%;">회원가입</button>
+      <button class="btn btn-success" style="width: 100%;" @click="SignUp()">회원가입</button>
     </form>
     <div style="text-align: center; margin: 10px 0;">
       <router-link :to="{name: 'FindPassword'}" tag="span" style="cursor: pointer;">비밀번호 찾기</router-link>
@@ -24,8 +24,38 @@
 </template>
 
 <script>
-export default {
+import {isValidEmail} from '../../utils/common'
 
+export default {
+  data () {
+    return {
+      nickname: '',
+      username: '',
+      password: '',
+      passwordCheck: ''
+    }
+  },
+  methods: {
+    SignUp () {
+      if (this.nickname === '' || this.username === '' || this.password === '' || this.passwordCheck === '') {
+        alert('입력되지 않은 항목이 존재합니다')
+      } else if (isValidEmail(this.username) === false) {
+        alert('이메일 형식이 올바르지 않습니다')
+      } else if (this.password !== this.passwordCheck) {
+        alert('비밀번호가 일치하지 않습니다')
+      } else {
+        this.$http.post('/users/', {
+          email: this.username,
+          nickname: this.nickname,
+          username: this.username,
+          password: this.password
+        }).then(res => {
+          alert('회원가입이 완료되었습니다')
+          this.$router.push({name: 'Login'})
+        })
+      }
+    }
+  }
 }
 </script>
 
