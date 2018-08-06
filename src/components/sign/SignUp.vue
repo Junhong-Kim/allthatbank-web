@@ -52,6 +52,12 @@ export default {
         }).then(res => {
           alert('회원가입이 완료되었습니다')
           this.$router.push({name: 'Login'})
+        }).catch(err => {
+          if (err.response.status === 409) {
+            alert('이미 존재하는 이메일입니다')
+          } else {
+            alert('알 수 없는 에러가 발생했습니다')
+          }
         })
       }
     }
