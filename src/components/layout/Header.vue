@@ -18,7 +18,8 @@
           <router-link to="/community">커뮤니티</router-link>
         </div>
       </li>
-      <li><router-link to="/login">로그인</router-link></li>
+      <li v-if="isLogin" style="color: white; padding: 13px 20px;">내정보</li>
+      <li v-else><router-link to="/login">로그인</router-link></li>
     </ul>
   </nav>
 </template>
@@ -29,6 +30,11 @@ export default {
   data () {
     return {
       appName: 'All That Bank'
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
     }
   }
 }

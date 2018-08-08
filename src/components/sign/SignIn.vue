@@ -7,12 +7,12 @@
     <div style="text-align: center; margin: 20px 0;">또는</div>
     <form>
       <div class="form-group">
-        <input type="email" class="form-control" id="username" placeholder="아이디(이메일)">
+        <input type="email" class="form-control" id="username" placeholder="아이디(이메일)" v-model="username">
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" id="password" placeholder="비밀번호">
+        <input type="password" class="form-control" id="password" placeholder="비밀번호" v-model="password">
       </div>
-      <button class="btn btn-success" style="width: 100%;">로그인</button>
+      <button class="btn btn-success" style="width: 100%;" @click='signIn()'>로그인</button>
     </form>
     <div style="text-align: center; margin: 10px 0;">
       <router-link :to="{name: 'FindPassword'}" tag="span" style="cursor: pointer;">비밀번호 찾기</router-link>
@@ -23,6 +23,9 @@
 </template>
 
 <script>
+import {setCookie} from '../../utils/common'
+import Constant from '../../constant'
+
 /* eslint-disable */
 export default {
   created () {
@@ -30,7 +33,9 @@ export default {
   },
   data () {
     return {
-      fbImg: require('../../assets/facebook.png')
+      fbImg: require('../../assets/facebook.png'),
+      username: '',
+      password: ''
     }
   },
   methods: {
@@ -101,6 +106,23 @@ export default {
           console.log(err)
         })
         self.$router.push({name: 'Main'})
+      })
+    },
+    signIn(username, password) {
+      this.$http.post('/users/signin', {
+        username: this.username,
+        password: this.password
+      }).then(res => {
+        const data = res.data.data
+        this.$router.push({name: 'Main'})
+        this.$store.commit(Constant.SET_LOGIN_STATUS, {isLogin: true})
+        setCookie('x-access-token', data['x_access_token'], 1)
+      }).catch(err => {
+        if (err.response.status === 401) {
+          alert('비밀번호가 일치하지 않습니다')
+        } else {
+          alert('일치하는 아이디가 없습니다')
+        }
       })
     }
   }
