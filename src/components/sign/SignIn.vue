@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import {setCookie} from '../../utils/common'
+import {decodeJwt, setCookie} from '../../utils/common'
 import Constant from '../../constant'
 
 /* eslint-disable */
@@ -86,7 +86,15 @@ export default {
         if (data === null) {
           this.createUser(fbAccessToken)
         } else {
+          const payload = {
+            'id': data.id,
+            'username': data.username,
+            'nickname': data.nickname,
+            'picture_url': data.picture_url
+          }
           self.$router.push({name: 'Main'})
+          self.$store.commit(Constant.SET_LOGIN_STATUS, {isLogin: true})
+          self.$store.commit(Constant.SET_USER, payload)
         }
       })
     },
@@ -99,7 +107,8 @@ export default {
           picture_url: res.picture.data.url,
           sns_type: 'facebook',
           sns_id: res.id,
-          sns_access_token: fbAccessToken
+          sns_access_token: fbAccessToken,
+          username: res.email
         }).then(res => {
           console.log(res)
         }).catch(err => {
@@ -114,8 +123,16 @@ export default {
         password: this.password
       }).then(res => {
         const data = res.data.data
+        const user = decodeJwt(data['x_access_token'])['user']
+        const payload = {
+          'id': user.id,
+          'username': user.username,
+          'nickname': user.nickname,
+          'picture_url': user.picture_url
+        }
         this.$router.push({name: 'Main'})
         this.$store.commit(Constant.SET_LOGIN_STATUS, {isLogin: true})
+        this.$store.commit(Constant.SET_USER, payload)
         setCookie('x-access-token', data['x_access_token'], 1)
       }).catch(err => {
         if (err.response.status === 401) {

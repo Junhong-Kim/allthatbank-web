@@ -18,7 +18,10 @@
           <router-link to="/community">커뮤니티</router-link>
         </div>
       </li>
-      <li v-if="isLogin" style="color: white; padding: 13px 20px;">내정보</li>
+      <li v-if="isLogin" class="profile">
+        <img v-if="user.picture_url == null" :src=profileImg>
+        <img v-else :src=user.picture_url>
+      </li>
       <li v-else><router-link to="/login">로그인</router-link></li>
     </ul>
   </nav>
@@ -29,12 +32,16 @@ export default {
   name: 'AppHeader',
   data () {
     return {
-      appName: 'All That Bank'
+      appName: 'All That Bank',
+      profileImg: require('../../assets/profile.png')
     }
   },
   computed: {
     isLogin () {
       return this.$store.state.isLogin
+    },
+    user () {
+      return this.$store.state.user
     }
   }
 }
@@ -91,5 +98,14 @@ li a:hover {
 .prepare {
   position: absolute;
   font-size: 8px;
+}
+.profile > img {
+  width: 32px;
+  margin: 10px 15px;
+  border-radius: 50%;
+}
+.profile > img:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 </style>

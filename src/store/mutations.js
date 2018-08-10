@@ -4,6 +4,12 @@ export default {
   [Constant.SET_LOGIN_STATUS]: (state, payload) => {
     state.isLogin = payload.isLogin
   },
+  [Constant.SET_USER]: (state, payload) => {
+    state.user.id = payload.id
+    state.user.username = payload.username
+    state.user.nickname = payload.nickname
+    state.user.picture_url = payload.picture_url
+  },
   [Constant.SET_BANK_LIST]: (state, payload) => {
     state.bankList = payload.bankList
     state.bankList.forEach(bank => {
