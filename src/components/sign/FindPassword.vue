@@ -1,6 +1,10 @@
 <template>
   <div>
-    <form>
+    <div class="notice">
+      가입하신 이메일 주소로<br>
+      <strong>임시 비밀번호</strong>를 전송해드립니다
+    </div>
+    <form @click.prevent>
       <div class="form-group">
         <input type="email" class="form-control" id="username" placeholder="아이디(이메일)">
       </div>
@@ -24,5 +28,9 @@ export default {
 span {
   color: #777777;
   font-size: 8px;
+}
+.notice {
+  margin-bottom: 15px;
+  text-align: center;
 }
 </style>

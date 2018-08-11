@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form>
+    <form @click.prevent>
       <div class="form-group">
         <input type="text" class="form-control" id="nickname" placeholder="닉네임" v-model="nickname">
       </div>
@@ -13,13 +13,13 @@
       <div class="form-group">
         <input type="password" class="form-control" id="passwordCheck" placeholder="비밀번호 확인" v-model="passwordCheck">
       </div>
-      <button class="btn btn-success" style="width: 100%;" @click="SignUp()">회원가입</button>
+      <button class="btn btn-success" style="width: 100%;" @click="signUp()">회원가입</button>
+      <div style="text-align: center; margin: 10px 0;">
+        <router-link :to="{name: 'FindPassword'}" tag="span" style="cursor: pointer;">비밀번호 찾기</router-link>
+        <span> | </span>
+        <router-link :to="{name: 'SignIn'}" tag="span" style="cursor: pointer;">로그인</router-link>
+      </div>
     </form>
-    <div style="text-align: center; margin: 10px 0;">
-      <router-link :to="{name: 'FindPassword'}" tag="span" style="cursor: pointer;">비밀번호 찾기</router-link>
-      <span> | </span>
-      <router-link :to="{name: 'SignIn'}" tag="span" style="cursor: pointer;">로그인</router-link>
-    </div>
   </div>
 </template>
 
@@ -36,9 +36,9 @@ export default {
     }
   },
   methods: {
-    SignUp () {
+    signUp () {
       if (this.nickname === '' || this.username === '' || this.password === '' || this.passwordCheck === '') {
-        alert('입력되지 않은 항목이 존재합니다')
+        alert('입력되지 않은 항목이 있습니다')
       } else if (isValidEmail(this.username) === false) {
         alert('이메일 형식이 올바르지 않습니다')
       } else if (this.password !== this.passwordCheck) {
