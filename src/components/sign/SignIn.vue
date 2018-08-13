@@ -28,9 +28,6 @@ import Constant from '../../constant'
 
 /* eslint-disable */
 export default {
-  created () {
-    this.fbInit()
-  },
   data () {
     return {
       fbImg: require('../../assets/facebook.png'),
@@ -39,27 +36,6 @@ export default {
     }
   },
   methods: {
-    fbInit () {
-      const self = this
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '290894348323672',
-          cookie     : true,
-          xfbml      : true,
-          version    : 'v3.0'
-        });
-        // FB.getLoginStatus(function(response) {
-        //   self.statusChangeCallback(response);
-        // });
-      };
-      (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js"
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    },
     fbLogin () {
       const self = this
       FB.login(res => {
@@ -95,6 +71,7 @@ export default {
           self.$router.push({name: 'Main'})
           self.$store.commit(Constant.SET_LOGIN_STATUS, {isLogin: true})
           self.$store.commit(Constant.SET_USER, payload)
+          self.tokenIssuance(data.username, null)
         }
       })
     },
@@ -117,34 +94,37 @@ export default {
         self.$router.push({name: 'Main'})
       })
     },
-    signIn() {
+    signIn () {
       if (this.username === '' || this.password === '') {
         alert('입력되지 않은 항목이 있습니다')
       } else {
-        this.$http.post('/users/signin', {
-          username: this.username,
-          password: this.password
-        }).then(res => {
-          const data = res.data.data
-          const user = decodeJwt(data['x_access_token'])['user']
-          const payload = {
-            'id': user.id,
-            'username': user.username,
-            'nickname': user.nickname,
-            'picture_url': user.picture_url
-          }
-          this.$router.push({name: 'Main'})
-          this.$store.commit(Constant.SET_LOGIN_STATUS, {isLogin: true})
-          this.$store.commit(Constant.SET_USER, payload)
-          setCookie('x-access-token', data['x_access_token'], 1)
-        }).catch(err => {
-          if (err.response.status === 401) {
-            alert('비밀번호가 일치하지 않습니다')
-          } else {
-            alert('일치하는 아이디가 없습니다')
-          }
-        })
+        this.tokenIssuance(this.username, this.password)
       }
+    },
+    tokenIssuance (username, password) {
+      this.$http.post('/users/signin', {
+        username,
+        password
+      }).then(res => {
+        const data = res.data.data
+        const user = decodeJwt(data['x_access_token'])['user']
+        const payload = {
+          'id': user.id,
+          'username': user.username,
+          'nickname': user.nickname,
+          'picture_url': user.picture_url
+        }
+        this.$router.push({name: 'Main'})
+        this.$store.commit(Constant.SET_LOGIN_STATUS, {isLogin: true})
+        this.$store.commit(Constant.SET_USER, payload)
+        setCookie('x-access-token', data['x_access_token'], 1)
+      }).catch(err => {
+        if (err.response.status === 401) {
+          alert('비밀번호가 일치하지 않습니다')
+        } else {
+          alert('일치하는 아이디가 없습니다')
+        }
+      })
     }
   }
 }

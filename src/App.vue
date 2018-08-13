@@ -12,6 +12,7 @@ import AppHeader from '@/components/layout/Header'
 import AppFooter from '@/components/layout/Footer'
 import Constant from './constant'
 
+/* eslint-disable */
 export default {
   name: 'App',
   components: {
@@ -19,14 +20,36 @@ export default {
     AppFooter
   },
   created () {
+    this.initData()
     const token = getCookie('x-access-token')
     if (token != null) {
-      this.setLocalUser(token)
+      this.setUser(token)
     }
-    this.$store.dispatch(Constant.SET_BANK_LIST)
   },
   methods: {
-    setLocalUser (token) {
+    initData () {
+      this.fbInit()
+      this.$store.dispatch(Constant.SET_BANK_LIST)
+    },
+    fbInit () {
+      const self = this
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '290894348323672',
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v3.0'
+        });
+      };
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js"
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    },
+    setUser (token) {
       const user = decodeJwt(token)['user']
       const payload = {
         'id': user.id,
