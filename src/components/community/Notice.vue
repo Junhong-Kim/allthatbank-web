@@ -1,13 +1,17 @@
 <template>
-  <div>공지사항</div>
+  <div>
+    <div class="title">공지사항</div>
+    <contents/>
+  </div>
 </template>
 
 <script>
+import Contents from '@/components/community/Contents'
+
 export default {
   name: 'Notice',
-  created () {
-    alert('서비스 준비중입니다.')
-    this.$router.go(-1)
+  components: {
+    Contents
   }
 }
 </script>

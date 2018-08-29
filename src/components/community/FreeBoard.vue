@@ -1,10 +1,18 @@
 <template>
-  <div>자유게시판</div>
+  <div>
+    <div class="title">자유게시판</div>
+    <contents/>
+  </div>
 </template>
 
 <script>
+import Contents from '@/components/community/Contents'
+
 export default {
-  name: 'FreeBoard'
+  name: 'FreeBoard',
+  components: {
+    Contents
+  }
 }
 </script>
 

@@ -12,12 +12,7 @@
           <router-link to="/deposit">예금</router-link>
         </div>
       </li>
-      <li>
-        <div style="position: relative;">
-          <div class="badge btn-danger prepare">준비중</div>
-          <router-link to="/community">커뮤니티</router-link>
-        </div>
-      </li>
+      <li><router-link to="/community">커뮤니티</router-link></li>
       <li v-if="isLogin" class="profile">
         <img v-if="user.picture_url == null" :src=profileImg>
         <img v-else :src=user.picture_url>

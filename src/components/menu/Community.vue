@@ -33,6 +33,12 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+.title {
+  color: white;
+  font-size: 25px;
+  margin: 20px auto;
+  text-align: center;
+  width: 600px;
+}
 </style>
