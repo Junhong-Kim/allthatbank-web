@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="custom-container title">Login</div>
+    <div class="title">Login</div>
     <div class="container">
       <div class="centered">
         <router-view/>
@@ -17,6 +17,9 @@ export default {
 
 <style scoped>
 .title {
+  background-color: #42b883;
+  width: 100%;
+  margin-top: 52px;
   color: white;
   padding: 10px;
   font-size: 25px;
