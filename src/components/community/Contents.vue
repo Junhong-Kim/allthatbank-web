@@ -31,6 +31,9 @@
         <li>다음</li>
       </ul>
     </div>
+    <div class="writing">
+      <button type="button">글쓰기</button>
+    </div>
   </div>
 </template>
 
@@ -54,7 +57,8 @@ export default {
 .custom-pagination > ul {
   font-size: 0;
   list-style-type: none;
-  margin: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   padding: 0;
   text-align: center;
 }
@@ -77,6 +81,25 @@ export default {
 .custom-pagination > ul > li:hover {
   background: #35495e;
   border: 1px solid #35495e;
-  color: white
+  color: white;
+}
+.writing {
+  margin: auto;
+  text-align: center;
+  width: 1000px;
+}
+.writing > button {
+  background: #42b883;
+  border: 1px solid #42b883;
+  color: white;
+  font-size: 10px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+.writing > button:focus {
+  outline: 0;
+}
+.writing > button:hover {
+  cursor: pointer;
 }
 </style>
