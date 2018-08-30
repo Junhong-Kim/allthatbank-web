@@ -18,6 +18,7 @@ import DepositProductOption from '@/components/deposit/ProductOption'
 import Notice from '@/components/community/Notice'
 import FreeBoard from '@/components/community/FreeBoard'
 import QnA from '@/components/community/QnA'
+import Writing from '@/components/community/Writing'
 
 Vue.use(Router)
 
@@ -105,6 +106,11 @@ export default new Router({
           path: 'question',
           name: 'QnA',
           component: QnA
+        },
+        {
+          path: 'writing',
+          name: 'Writing',
+          component: Writing
         }
       ]
     },

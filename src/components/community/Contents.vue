@@ -32,14 +32,19 @@
       </ul>
     </div>
     <div class="writing">
-      <button type="button">글쓰기</button>
+      <button type="button" @click="writing">글쓰기</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CommunityContents'
+  name: 'CommunityContents',
+  methods: {
+    writing () {
+      this.$router.push({'name': 'Writing'})
+    }
+  }
 }
 </script>
 
