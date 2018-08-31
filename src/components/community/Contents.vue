@@ -42,7 +42,7 @@ export default {
   name: 'CommunityContents',
   methods: {
     writing () {
-      this.$router.push({'name': 'Writing'})
+      this.$router.push({'name': 'Editor'})
     }
   }
 }
