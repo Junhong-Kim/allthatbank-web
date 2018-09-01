@@ -3,9 +3,9 @@
     <div class="title">글쓰기</div>
     <div class="editor-container">
       <input type="text" placeholder="제목" v-model="title">
-      <vue-editor v-model="content" style="width: 1000px; margin: auto;"></vue-editor>
+      <vue-editor v-model="contents" style="width: 1000px; margin: auto;"></vue-editor>
       <div class="save">
-        <button type="button" @click="saveContent">확인</button>
+        <button type="button" @click="save">확인</button>
       </div>
     </div>
   </div>
@@ -22,14 +22,21 @@ export default {
   data () {
     return {
       title: '',
-      content: ''
+      contents: ''
     }
   },
   methods: {
-    saveContent () {
+    save () {
       if (confirm('현재 글을 작성합니다.')) {
-        this.$router.replace({'name': 'FreeBoard'})
-        console.log(this.content)
+        this.$http.post('/board/post', {
+          title: this.title,
+          contents: this.contents,
+          user: this.$store.state.user.id
+        }).then(res => {
+          this.$router.replace({'name': 'FreeBoard'})
+        }).catch(err => {
+          console.log(err)
+        })
       }
     }
   }
