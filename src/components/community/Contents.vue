@@ -12,13 +12,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item,index) in 10" :key="index" style="cursor: pointer">
-          <td>{{index}}</td>
-          <td style="text-align: left;">테스트</td>
-          <td>2018.01.01</td>
-          <td>테스트</td>
-          <td>0</td>
-          <td>0</td>
+        <tr v-for="(post, index) in posts" :key="index" style="cursor: pointer">
+          <td>{{post.id}}</td>
+          <td style="text-align: left;">{{post.title}}</td>
+          <td>{{post.created_at}}</td>
+          <td>{{post.user}}</td>
+          <td>{{post.views}}</td>
+          <td>{{post.like}}</td>
         </tr>
       </tbody>
     </table>
@@ -40,6 +40,11 @@
 <script>
 export default {
   name: 'CommunityContents',
+  props: {
+    posts: {
+      type: Array
+    }
+  },
   methods: {
     writing () {
       this.$router.push({'name': 'Editor'})
