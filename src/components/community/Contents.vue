@@ -16,7 +16,7 @@
           <td>{{post.id}}</td>
           <td style="text-align: left;">{{post.title}}</td>
           <td>{{post.created_at}}</td>
-          <td>{{post.user}}</td>
+          <td>{{post.user.nickname}}</td>
           <td>{{post.views}}</td>
           <td>{{post.like}}</td>
         </tr>
@@ -111,5 +111,8 @@ export default {
 }
 .writing > button:hover {
   cursor: pointer;
+}
+tbody > tr > td {
+  vertical-align: middle;
 }
 </style>
