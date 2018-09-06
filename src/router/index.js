@@ -19,6 +19,7 @@ import Notice from '@/components/community/Notice'
 import FreeBoard from '@/components/community/FreeBoard'
 import QnA from '@/components/community/QnA'
 import Editor from '@/components/community/Editor'
+import PostDetail from '@/components/community/PostDetail'
 
 Vue.use(Router)
 
@@ -101,6 +102,11 @@ export default new Router({
           path: 'freeBoard',
           name: 'FreeBoard',
           component: FreeBoard
+        },
+        {
+          path: 'freeBoard/:id',
+          name: 'FreeBoardDetail',
+          component: PostDetail
         },
         {
           path: 'question',

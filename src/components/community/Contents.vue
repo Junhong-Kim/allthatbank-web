@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(post, index) in posts" :key="index" style="cursor: pointer">
+        <tr v-for="(post, index) in posts" :key="index" @click="detail(post.id)" style="cursor: pointer">
           <td>{{post.id}}</td>
           <td style="text-align: left;">{{post.title}}</td>
           <td>{{post.created_at}}</td>
@@ -48,6 +48,9 @@ export default {
   methods: {
     writing () {
       this.$router.push({'name': 'Editor'})
+    },
+    detail (postId) {
+      this.$router.push({'name': 'FreeBoardDetail', params: { id: postId }})
     }
   }
 }
