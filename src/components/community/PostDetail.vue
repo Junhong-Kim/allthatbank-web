@@ -1,15 +1,52 @@
 <template>
-  <div>
-     상세 페이지
+  <div style="background: white; padding: 10px 200px;">
+    <div style="border: 1px solid black; padding: 5px;" v-if="this.post">
+      <div class="post-title">
+        <span>{{this.post.title}}</span>
+        <span class="datetime">{{this.post.created_at}}</span>
+      </div>
+      <div class="profile">
+        <img :src="this.post.user.picture_url">
+        <span>{{this.post.user.nickname}}</span>
+      </div>
+      <span v-html="this.post.contents"></span>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PostDetail'
+  name: 'PostDetail',
+  created () {
+    this.$http.get('/board/post/' + this.id).then(res => {
+      const data = res.data.data
+      this.post = data
+    })
+  },
+  data () {
+    return {
+      id: this.$route.params.id,
+      post: null
+    }
+  }
 }
 </script>
 
 <style scoped>
-
+.post-title {
+  border-bottom: 1px dotted black;
+  padding-bottom: 5px;
+}
+.post-title > .datetime {
+  color: gray;
+  float: right;
+}
+.profile {
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+.profile > img {
+  border-radius: 50%;
+  width: 32px;
+}
 </style>
