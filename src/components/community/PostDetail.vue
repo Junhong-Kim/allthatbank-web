@@ -11,6 +11,10 @@
       </div>
       <span v-html="this.post.contents"></span>
     </div>
+    <div style="border: 1px solid black; margin-top: 10px; padding: 5px;">
+      <input type="text" placeholder="댓글을 입력해주세요." v-model="comment">
+      <button type="button" @click=save>등록</button>
+    </div>
   </div>
 </template>
 
@@ -26,7 +30,21 @@ export default {
   data () {
     return {
       id: this.$route.params.id,
-      post: null
+      post: null,
+      comment: ''
+    }
+  },
+  methods: {
+    save () {
+      this.$http.post('/board/post/' + this.id + '/comment', {
+        contents: this.comment,
+        user: this.$store.state.user.id
+      }).then(res => {
+        this.comment = ''
+      }).catch(err => {
+        alert('로그인이 필요합니다.')
+        console.log(err)
+      })
     }
   }
 }
