@@ -15,6 +15,20 @@
       <input type="text" placeholder="댓글을 입력해주세요." v-model="comment">
       <button type="button" @click=save>등록</button>
     </div>
+    <ul class="comment" v-if="this.comments.length > 0">
+      <li v-for="(comment, index) in comments" :key=index>
+        <img :src="comment.user.picture_url">
+        <div>
+          <span><strong>{{comment.user.nickname}}</strong></span>
+          <span style="color: gray;">{{comment.created_at}}</span>
+          <div class="like">
+            <span>{{comment.like}}</span>
+            <img src="../../assets/logo.png">
+          </div>
+        </div>
+        <div>{{comment.contents}}</div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -22,19 +36,30 @@
 export default {
   name: 'PostDetail',
   created () {
-    this.$http.get('/board/post/' + this.id).then(res => {
-      const data = res.data.data
-      this.post = data
-    })
+    this.getPost()
+    this.getComments()
   },
   data () {
     return {
       id: this.$route.params.id,
       post: null,
-      comment: ''
+      comment: '',
+      comments: []
     }
   },
   methods: {
+    getPost () {
+      this.$http.get('/board/post/' + this.id).then(res => {
+        const data = res.data.data
+        this.post = data
+      })
+    },
+    getComments () {
+      this.$http.get('/board/post/' + this.id + '/comment').then(res => {
+        const data = res.data.data
+        this.comments = data
+      })
+    },
     save () {
       this.$http.post('/board/post/' + this.id + '/comment', {
         contents: this.comment,
@@ -66,5 +91,32 @@ export default {
 .profile > img {
   border-radius: 50%;
   width: 32px;
+}
+.comment {
+  border: 1px solid black;
+  list-style-type: none;
+  margin-top: 10px;
+  padding: 0;
+}
+.comment > li {
+  padding: 10px 0;
+}
+.comment > li:hover {
+  background: #ECECEC;
+}
+.comment > li > img {
+  border-radius: 50%;
+  float: left;
+  margin: 10px;
+  margin-right: 15px;
+  width: 32px;
+}
+.like {
+  float: right;
+  margin: 10px;
+}
+.like > img {
+  cursor: pointer;
+  width: 20px;
 }
 </style>
