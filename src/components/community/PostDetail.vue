@@ -23,7 +23,7 @@
           <span style="color: gray;">{{comment.created_at}}</span>
           <div class="like">
             <span>{{comment.like}}</span>
-            <img src="../../assets/logo.png">
+            <img src="../../assets/logo.png" @click="like(comment.id)">
           </div>
         </div>
         <div>{{comment.contents}}</div>
@@ -68,6 +68,15 @@ export default {
         this.comment = ''
       }).catch(err => {
         alert('로그인이 필요합니다.')
+        console.log(err)
+      })
+    },
+    like (commentId) {
+      const userId = this.$store.state.user.id
+      this.$http.post('/board/comment/' + commentId + '/like?user_id=' + userId
+      ).then(res => {
+        console.log(res)
+      }).catch(err => {
         console.log(err)
       })
     }
