@@ -10,6 +10,10 @@
         <span>{{this.post.user.nickname}}</span>
       </div>
       <span v-html="this.post.contents"></span>
+      <div class="like-post">
+        <span>{{this.post.like}}</span>
+        <img src="../../assets/logo.png" @click="likePost">
+      </div>
     </div>
     <div style="border: 1px solid black; margin-top: 10px; padding: 5px;">
       <input type="text" placeholder="댓글을 입력해주세요." v-model="comment">
@@ -21,9 +25,9 @@
         <div>
           <span><strong>{{comment.user.nickname}}</strong></span>
           <span style="color: gray;">{{comment.created_at}}</span>
-          <div class="like">
+          <div class="like-comment">
             <span>{{comment.like}}</span>
-            <img src="../../assets/logo.png" @click="like(comment.id)">
+            <img src="../../assets/logo.png" @click="likeComment(comment.id)">
           </div>
         </div>
         <div>{{comment.contents}}</div>
@@ -41,7 +45,8 @@ export default {
   },
   data () {
     return {
-      id: this.$route.params.id,
+      userId: this.$store.state.user.id,
+      postId: this.$route.params.id,
       post: null,
       comment: '',
       comments: []
@@ -49,21 +54,21 @@ export default {
   },
   methods: {
     getPost () {
-      this.$http.get('/board/post/' + this.id).then(res => {
+      this.$http.get('/board/post/' + this.postId).then(res => {
         const data = res.data.data
         this.post = data
       })
     },
     getComments () {
-      this.$http.get('/board/post/' + this.id + '/comment').then(res => {
+      this.$http.get('/board/post/' + this.postId + '/comment').then(res => {
         const data = res.data.data
         this.comments = data
       })
     },
     save () {
-      this.$http.post('/board/post/' + this.id + '/comment', {
+      this.$http.post('/board/post/' + this.postId + '/comment', {
         contents: this.comment,
-        user: this.$store.state.user.id
+        user: this.userId
       }).then(res => {
         this.comment = ''
       }).catch(err => {
@@ -71,9 +76,16 @@ export default {
         console.log(err)
       })
     },
-    like (commentId) {
-      const userId = this.$store.state.user.id
-      this.$http.post('/board/comment/' + commentId + '/like?user_id=' + userId
+    likePost () {
+      this.$http.post('/board/post/' + this.postId + '/like?user_id=' + this.userId
+      ).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    likeComment (commentId) {
+      this.$http.post('/board/comment/' + commentId + '/like?user_id=' + this.userId
       ).then(res => {
         console.log(res)
       }).catch(err => {
@@ -120,11 +132,18 @@ export default {
   margin-right: 15px;
   width: 32px;
 }
-.like {
+.like-post {
+  text-align: center;
+}
+.like-post > img {
+  cursor: pointer;
+  width: 20px;
+}
+.like-comment {
   float: right;
   margin: 10px;
 }
-.like > img {
+.like-comment > img {
   cursor: pointer;
   width: 20px;
 }
