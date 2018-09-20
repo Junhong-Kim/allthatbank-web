@@ -20,7 +20,7 @@ export default {
       }
     }).then(res => {
       const data = res.data.data
-      this.posts = data.reverse()
+      this.posts = data
     }).catch(err => {
       console.log(err)
     })
