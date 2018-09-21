@@ -25,9 +25,9 @@
     <div class="custom-pagination">
       <ul>
         <li>이전</li>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
+        <li v-for="(page, index) in maxPage" :key="index">
+          {{page}}
+        </li>
         <li>다음</li>
       </ul>
     </div>
@@ -43,6 +43,9 @@ export default {
   props: {
     posts: {
       type: Array
+    },
+    maxPage: {
+      type: Number
     }
   },
   methods: {

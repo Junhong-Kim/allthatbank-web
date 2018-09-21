@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="title">자유게시판</div>
-    <contents :posts="this.posts"/>
+    <contents
+      :posts="this.posts"
+      :maxPage="this.maxPage"/>
   </div>
 </template>
 
@@ -19,15 +21,17 @@ export default {
         page: 1
       }
     }).then(res => {
-      const data = res.data.data
-      this.posts = data
+      const data = res.data
+      this.posts = data.data
+      this.maxPage = data.max_page
     }).catch(err => {
       console.log(err)
     })
   },
   data () {
     return {
-      posts: []
+      posts: [],
+      maxPage: 0
     }
   }
 }
