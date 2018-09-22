@@ -25,7 +25,7 @@
     <div class="custom-pagination">
       <ul>
         <li>이전</li>
-        <li v-for="(page, index) in maxPage" :key="index">
+        <li v-for="(page, index) in maxPage" :key="index" @click="getPosts(page)">
           {{page}}
         </li>
         <li>다음</li>
@@ -54,6 +54,9 @@ export default {
     },
     detail (postId) {
       this.$router.push({'name': 'FreeBoardDetail', params: { id: postId }})
+    },
+    getPosts (page) {
+      this.$emit('getPosts', page)
     }
   }
 }

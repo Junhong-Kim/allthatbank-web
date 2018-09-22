@@ -2,8 +2,9 @@
   <div>
     <div class="title">자유게시판</div>
     <contents
-      :posts="this.posts"
-      :maxPage="this.maxPage"/>
+      :posts="posts"
+      :maxPage="maxPage"
+      @getPosts="getPosts"/>
   </div>
 </template>
 
@@ -16,22 +17,28 @@ export default {
     Contents
   },
   created () {
-    this.$http.get('/board/post', {
-      params: {
-        page: 1
-      }
-    }).then(res => {
-      const data = res.data
-      this.posts = data.data
-      this.maxPage = data.max_page
-    }).catch(err => {
-      console.log(err)
-    })
+    this.$on('getPosts', this.getPosts)
+    this.getPosts(1)
   },
   data () {
     return {
       posts: [],
       maxPage: 0
+    }
+  },
+  methods: {
+    getPosts (page) {
+      this.$http.get('/board/post', {
+        params: {
+          page: page
+        }
+      }).then(res => {
+        const data = res.data
+        this.posts = data.data
+        this.maxPage = data.max_page
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }
