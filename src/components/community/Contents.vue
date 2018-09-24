@@ -24,11 +24,11 @@
     </table>
     <div class="custom-pagination">
       <ul>
-        <li>이전</li>
-        <li v-for="(page, index) in maxPage" :key="index" @click="getPosts(page)">
+        <li @click="prevPage(startPage)">이전</li>
+        <li v-for="(page, index) in pages" :key="index" @click="getPosts(page)">
           {{page}}
         </li>
-        <li>다음</li>
+        <li @click="nextPage(startPage)">다음</li>
       </ul>
     </div>
     <div class="writing">
@@ -40,12 +40,32 @@
 <script>
 export default {
   name: 'CommunityContents',
+  data () {
+    return {
+      startPage: 1,
+      offset: 5
+    }
+  },
   props: {
     posts: {
       type: Array
     },
     maxPage: {
       type: Number
+    }
+  },
+  computed: {
+    pages () {
+      let arr = []
+      let endPage = this.startPage + (this.offset - 1)
+      if (endPage >= this.maxPage) {
+        endPage = this.maxPage
+      }
+
+      for (let i = this.startPage; i <= endPage; i++) {
+        arr.push(i)
+      }
+      return arr
     }
   },
   methods: {
@@ -57,6 +77,22 @@ export default {
     },
     getPosts (page) {
       this.$emit('getPosts', page)
+    },
+    prevPage (startPage) {
+      if (startPage - 1 === 0) {
+        alert('이전 페이지가 없습니다.')
+      } else {
+        this.startPage = startPage - this.offset
+        this.getPosts(this.startPage)
+      }
+    },
+    nextPage (startPage) {
+      if (startPage + this.offset > this.maxPage) {
+        alert('다음 페이지가 없습니다.')
+      } else {
+        this.startPage = startPage + this.offset
+        this.getPosts(this.startPage)
+      }
     }
   }
 }
