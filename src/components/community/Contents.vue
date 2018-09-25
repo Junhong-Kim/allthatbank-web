@@ -25,7 +25,8 @@
     <div class="custom-pagination">
       <ul>
         <li @click="prevPage(startPage)">이전</li>
-        <li v-for="(page, index) in pages" :key="index" @click="getPosts(page)">
+        <li v-for="(page, index) in pages" :key="index" @click="getPosts(page)"
+            :class="[page == nowPage ? 'selectPage' : '']">
           {{page}}
         </li>
         <li @click="nextPage(startPage)">다음</li>
@@ -42,6 +43,7 @@ export default {
   name: 'CommunityContents',
   data () {
     return {
+      nowPage: 1,
       startPage: 1,
       offset: 5
     }
@@ -76,6 +78,7 @@ export default {
       this.$router.push({'name': 'FreeBoardDetail', params: { id: postId }})
     },
     getPosts (page) {
+      this.nowPage = page
       this.$emit('getPosts', page)
     },
     prevPage (startPage) {
@@ -135,7 +138,7 @@ export default {
 }
 .custom-pagination > ul > li:hover {
   background: #35495e;
-  border: 1px solid #35495e;
+  border: 1px solid #dee2e6;
   color: white;
 }
 .writing {
@@ -159,5 +162,15 @@ export default {
 }
 tbody > tr > td {
   vertical-align: middle;
+}
+.selectPage {
+  background: #42b883;
+  border: 1px solid #dee2e6;
+  color: white;
+  cursor: pointer;
+  display: inline;
+  font-size: 10px;
+  margin: 1px;
+  padding: 5px 10px;
 }
 </style>
