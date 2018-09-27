@@ -14,7 +14,10 @@
       <tbody>
         <tr v-for="(post, index) in posts" :key="index" @click="detail(post.id)" style="cursor: pointer">
           <td>{{post.id}}</td>
-          <td style="text-align: left;">{{post.title}}</td>
+          <td class="post-title">
+            {{post.title}}
+            <span v-if="post.comment_count > 0">[{{post.comment_count}}]</span>
+          </td>
           <td>{{post.created_at}}</td>
           <td>{{post.user.nickname}}</td>
           <td>{{post.views}}</td>
@@ -105,6 +108,13 @@ export default {
 .post-container {
   background: white;
   padding-top: 20px;
+}
+.post-title {
+  text-align: left;
+}
+.post-title > span {
+  color: #42b883;
+  font-weight: bold;
 }
 .custom-table {
   font-size: 12px;
