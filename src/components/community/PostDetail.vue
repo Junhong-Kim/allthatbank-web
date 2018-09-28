@@ -15,7 +15,7 @@
         <img src="../../assets/logo.png" @click="likePost">
       </div>
     </div>
-    <div style="border: 1px solid black; margin-top: 10px; padding: 5px;">
+    <div class="write-comment">
       <input type="text" placeholder="댓글을 입력해주세요." v-model="comment">
       <button type="button" @click=save>등록</button>
     </div>
@@ -72,7 +72,11 @@ export default {
       }).then(res => {
         this.comment = ''
       }).catch(err => {
-        alert('로그인이 필요합니다.')
+        if (this.comment === '') {
+          alert('댓글을 입력해주세요.')
+        } else {
+          alert('로그인이 필요합니다.')
+        }
         console.log(err)
       })
     },
@@ -104,6 +108,33 @@ export default {
 .post-title > .datetime {
   color: gray;
   float: right;
+}
+.write-comment {
+  border: 1px solid black;
+  margin-top: 10px;
+  padding: 5px;
+}
+.write-comment > input {
+  float: left;
+  padding-left: 5px;
+  width: 95%;
+}
+.write-comment > input:focus {
+  outline: none;
+}
+.write-comment > button {
+  background: #42b883;
+  border: 1px solid #42b883;
+  color: white;
+  font-size: 12px;
+  padding: 5px 10px;
+  width: 5%;
+}
+.write-comment > button:focus {
+  outline: none;
+}
+.write-comment > button:hover {
+  cursor: pointer;
 }
 .profile {
   margin-top: 5px;
