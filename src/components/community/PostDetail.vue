@@ -17,7 +17,7 @@
     </div>
     <div class="write-comment">
       <input type="text" placeholder="댓글을 입력해주세요." v-model="comment">
-      <button type="button" @click=save>등록</button>
+      <button type="button" @click=writeComment>등록</button>
     </div>
     <ul class="comment" v-if="this.comments.length > 0">
       <li v-for="(comment, index) in comments" :key=index>
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import {getCookie} from '@/utils/common'
+
 export default {
   name: 'PostDetail',
   created () {
@@ -65,17 +67,19 @@ export default {
         this.comments = data
       })
     },
-    save () {
+    writeComment () {
       this.$http.post('/board/post/' + this.postId + '/comment', {
         contents: this.comment,
         user: this.userId
       }).then(res => {
         this.comment = ''
       }).catch(err => {
-        if (this.comment === '') {
-          alert('댓글을 입력해주세요.')
-        } else {
+        const token = getCookie('x-access-token')
+        if (token == null) {
           alert('로그인이 필요합니다.')
+          this.comment = ''
+        } else {
+          alert('댓글을 입력해주세요.')
         }
         console.log(err)
       })
