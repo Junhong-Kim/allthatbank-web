@@ -35,13 +35,15 @@
         <li @click="nextPage(startPage)">다음</li>
       </ul>
     </div>
-    <div class="writing">
-      <button type="button" @click="writing">글쓰기</button>
+    <div class="write-post">
+      <button type="button" @click="writePost">글쓰기</button>
     </div>
   </div>
 </template>
 
 <script>
+import {getCookie} from '@/utils/common'
+
 export default {
   name: 'CommunityContents',
   data () {
@@ -74,8 +76,13 @@ export default {
     }
   },
   methods: {
-    writing () {
-      this.$router.push({'name': 'Editor'})
+    writePost () {
+      const token = getCookie('x-access-token')
+      if (token == null) {
+        alert('로그인이 필요합니다.')
+      } else {
+        this.$router.push({'name': 'Editor'})
+      }
     },
     detail (postId) {
       this.$router.push({'name': 'FreeBoardDetail', params: { id: postId }})
@@ -151,23 +158,24 @@ export default {
   border: 1px solid #dee2e6;
   color: white;
 }
-.writing {
+.write-post {
   margin: auto;
   text-align: center;
   width: 1000px;
 }
-.writing > button {
+.write-post > button {
   background: #42b883;
   border: 1px solid #42b883;
+  border-radius: 5px;
   color: white;
   font-size: 10px;
   margin-bottom: 10px;
   padding: 5px 10px;
 }
-.writing > button:focus {
+.write-post > button:focus {
   outline: 0;
 }
-.writing > button:hover {
+.write-post > button:hover {
   cursor: pointer;
 }
 tbody > tr > td {
