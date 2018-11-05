@@ -1,7 +1,7 @@
 <template>
   <div class="bank-grid">
     <div v-for="(bank, index) in banks" :key="index" >
-      <bank v-if="index === 9" class="bank-grid-item" :bank="bank" style="clear: both"
+      <bank v-if="index === banks.length / 2" class="bank-grid-item" :bank="bank" style="clear: both"
             @select="select" :class="{active: selectBanks.includes(bank.fin_co_no)}">
       </bank>
       <bank v-else class="bank-grid-item" :bank="bank"

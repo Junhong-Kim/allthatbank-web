@@ -1,10 +1,18 @@
 <template>
-  <div>Q&A</div>
+  <div>
+    <div class="title">Q&A</div>
+    <contents/>
+  </div>
 </template>
 
 <script>
+import Contents from '@/components/community/Contents'
+
 export default {
-  name: 'QnA'
+  name: 'QnA',
+  components: {
+    Contents
+  }
 }
 </script>
 

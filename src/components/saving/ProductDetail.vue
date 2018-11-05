@@ -1,7 +1,6 @@
 <template>
-  <div style="background: #f9f9f9; padding-bottom: 30px;">
+  <div style="background: #f9f9f9; padding: 30px 0;">
     <div v-if="isDataLoaded" class="product-wrapper">
-      <div class="title">상품 정보</div>
       <div class="detail">
         <div class="join-way">{{productJoinWay}}</div>
         <div class="product-name">{{product['product_name']}}</div>
@@ -195,15 +194,8 @@ export default {
 <style scoped>
 .product-wrapper {
   background: #f9f9f9;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   width: 800px;
-}
-.product-wrapper > .title {
-  font-size: 25px;
-  margin-left: 10px;
-  padding-top: 20px;
-  padding-bottom: 10px;
 }
 .product-wrapper > .detail {
   background: white;
