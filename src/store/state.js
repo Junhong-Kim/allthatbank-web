@@ -3,5 +3,6 @@ export default {
   user: {},
   selectBanks: [],
   bankList: [],
-  productList: []
+  productList: [],
+  depositProductList: []
 }

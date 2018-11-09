@@ -8,7 +8,7 @@
       <li><router-link to="/saving">적금</router-link></li>
       <li>
         <div style="position: relative;">
-          <div class="badge btn-danger prepare">준비중</div>
+          <!-- <div class="badge btn-danger prepare">준비중</div> -->
           <router-link to="/deposit">예금</router-link>
         </div>
       </li>

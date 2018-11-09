@@ -26,6 +26,13 @@ export default {
       this.setUser(token)
     }
   },
+  watch: {
+    $route (to, from){
+        this.$store.state.selectBanks = []
+        this.$store.state.productList = []
+        this.$store.state.depositProductList = []
+    }
+  },
   methods: {
     initData () {
       this.fbInit()

@@ -24,8 +24,10 @@ export default {
     const payload = {
       fin_co_nos: this.selectBanks
     }
-    if (this.$store.state.selectBanks.length > 0) {
+    if (this.$store.state.selectBanks.length > 0 && this.$router.currentRoute.name === 'SavingBankName') {
       this.$store.dispatch(Constant.SET_SAVING_PRODUCT_LIST, payload)
+    } else if (this.$store.state.selectBanks.length > 0 && this.$router.currentRoute.name === 'DepositBankName') {
+      this.$store.dispatch(Constant.SET_DEPOSIT_PRODUCT_LIST, payload)
     }
   },
   data () {
@@ -48,8 +50,10 @@ export default {
         this.$store.state.selectBanks.push(finCoNo)
       }
       // 선택한 은행이 없을 때 상품 리스트 초기화
-      if (this.selectBanks.length === 0) {
+      if (this.selectBanks.length === 0 && this.$router.currentRoute.name === 'SavingBankName') {
         this.$store.state.productList = []
+      } else if (this.selectBanks.length === 0 && this.$router.currentRoute.name === 'DepositBankName') {
+        this.$store.state.depositProductList = []
       }
       console.log(this.selectBanks)
     }

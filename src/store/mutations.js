@@ -136,5 +136,68 @@ export default {
           product.bank_name = '신규은행'
       }
     })
+  },
+  [Constant.SET_DEPOSIT_PRODUCT_LIST]: (state, payload) => {
+    state.depositProductList = payload.productList
+    state.depositProductList.forEach(product => {
+      switch (product.bank_id) {
+        case '0010001':
+          product.bank_name = '우리은행'
+          break
+        case '0010002':
+          product.bank_name = 'SC제일은행'
+          break
+        case '0010006':
+          product.bank_name = '씨티은행'
+          break
+        case '0010016':
+          product.bank_name = '대구은행'
+          break
+        case '0010017':
+          product.bank_name = '부산은행'
+          break
+        case '0010019':
+          product.bank_name = '광주은행'
+          break
+        case '0010020':
+          product.bank_name = '제주은행'
+          break
+        case '0010022':
+          product.bank_name = '전북은행'
+          break
+        case '0010024':
+          product.bank_name = '경남은행'
+          break
+        case '0010026':
+          product.bank_name = 'IBK기업은행'
+          break
+        case '0010030':
+          product.bank_name = 'KDB산업은행'
+          break
+        case '0010927':
+          product.bank_name = '국민은행'
+          break
+        case '0011625':
+          product.bank_name = '신한은행'
+          break
+        case '0013175':
+          product.bank_name = '농협은행'
+          break
+        case '0013909':
+          product.bank_name = 'KEB하나은행'
+          break
+        case '0014674':
+          product.bank_name = '케이뱅크'
+          break
+        case '0014807':
+          product.bank_name = '수협은행'
+          break
+        case '0015130':
+          product.bank_name = '카카오뱅크'
+          break
+        default:
+          product.bank_name = '신규은행'
+      }
+    })
   }
 }

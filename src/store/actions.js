@@ -32,5 +32,21 @@ export default {
       }
       store.commit(Constant.SET_SAVING_PRODUCT_LIST, payload)
     })
+  },
+  [Constant.SET_DEPOSIT_PRODUCT_LIST]: (store, payload) => {
+    axios.get('/fss/deposit_products', {
+      params: {
+        fin_co_no: payload.fin_co_nos
+      },
+      paramsSerializer: function (params) {
+        return qs.stringify(params, { indices: false })
+      }
+    }).then(res => {
+      const data = res.data.data
+      payload = {
+        productList: data
+      }
+      store.commit(Constant.SET_DEPOSIT_PRODUCT_LIST, payload)
+    })
   }
 }

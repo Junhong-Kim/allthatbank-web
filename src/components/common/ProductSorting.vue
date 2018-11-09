@@ -34,7 +34,10 @@ export default {
       this.sortByKey(key)
     },
     sortByKey (key) {
-      const productList = this.$store.state.productList
+      let path = this.$router.currentRoute.path.split('/')[1]
+      const productList = (path === 'saving')
+        ? this.$store.state.productList
+        : this.$store.state.depositProductList
       productList.sort(function (a, b) {
         let keyA = a[key]
         let keyB = b[key]
