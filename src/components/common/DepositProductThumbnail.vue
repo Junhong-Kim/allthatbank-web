@@ -54,7 +54,7 @@ export default {
   methods: {
     select () {
       this.$router.push({
-        name: 'SavingProductDetail',
+        name: 'DepositProductDetail',
         params: {
           productId: this.product['product_id'],
           bankId: this.product['bank_id']

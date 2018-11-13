@@ -15,6 +15,7 @@ import SavingProductDetail from '@/components/saving/ProductDetail'
 import DepositBankName from '@/components/deposit/BankName'
 import DepositProductName from '@/components/deposit/ProductName'
 import DepositProductOption from '@/components/deposit/ProductOption'
+import DepositProductDetail from '@/components/deposit/ProductDetail'
 import Notice from '@/components/community/Notice'
 import FreeBoard from '@/components/community/FreeBoard'
 import QnA from '@/components/community/QnA'
@@ -82,6 +83,11 @@ export default new Router({
           path: 'productOption',
           name: 'DepositProductOption',
           component: DepositProductOption
+        },
+        {
+          path: 'detail',
+          name: 'DepositProductDetail',
+          component: DepositProductDetail
         }
       ]
     },
