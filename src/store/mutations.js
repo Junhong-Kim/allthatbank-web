@@ -18,7 +18,7 @@ export default {
           bank.kor_co_nm = '우리은행'
           break
         case '0010002':
-          bank.kor_co_nm = 'SC제일은행'
+          bank.kor_co_nm = '제일은행'
           break
         case '0010006':
           bank.kor_co_nm = '씨티은행'
@@ -42,10 +42,10 @@ export default {
           bank.kor_co_nm = '경남은행'
           break
         case '0010026':
-          bank.kor_co_nm = 'IBK기업은행'
+          bank.kor_co_nm = '기업은행'
           break
         case '0010030':
-          bank.kor_co_nm = 'KDB산업은행'
+          bank.kor_co_nm = '산업은행'
           break
         case '0010927':
           bank.kor_co_nm = '국민은행'
@@ -57,7 +57,7 @@ export default {
           bank.kor_co_nm = '농협은행'
           break
         case '0013909':
-          bank.kor_co_nm = 'KEB하나은행'
+          bank.kor_co_nm = '하나은행'
           break
         case '0014674':
           bank.kor_co_nm = '케이뱅크'
@@ -71,7 +71,6 @@ export default {
         default:
           bank.kor_co_nm = '신규은행'
       }
-      bank.logo = 'logo.png'
     })
   },
   [Constant.SET_SAVING_PRODUCT_LIST]: (state, payload) => {
@@ -82,7 +81,7 @@ export default {
           product.bank_name = '우리은행'
           break
         case '0010002':
-          product.bank_name = 'SC제일은행'
+          product.bank_name = '제일은행'
           break
         case '0010006':
           product.bank_name = '씨티은행'
@@ -106,10 +105,10 @@ export default {
           product.bank_name = '경남은행'
           break
         case '0010026':
-          product.bank_name = 'IBK기업은행'
+          product.bank_name = '기업은행'
           break
         case '0010030':
-          product.bank_name = 'KDB산업은행'
+          product.bank_name = '산업은행'
           break
         case '0010927':
           product.bank_name = '국민은행'
@@ -121,7 +120,7 @@ export default {
           product.bank_name = '농협은행'
           break
         case '0013909':
-          product.bank_name = 'KEB하나은행'
+          product.bank_name = '하나은행'
           break
         case '0014674':
           product.bank_name = '케이뱅크'
@@ -145,7 +144,7 @@ export default {
           product.bank_name = '우리은행'
           break
         case '0010002':
-          product.bank_name = 'SC제일은행'
+          product.bank_name = '제일은행'
           break
         case '0010006':
           product.bank_name = '씨티은행'
@@ -169,10 +168,10 @@ export default {
           product.bank_name = '경남은행'
           break
         case '0010026':
-          product.bank_name = 'IBK기업은행'
+          product.bank_name = '기업은행'
           break
         case '0010030':
-          product.bank_name = 'KDB산업은행'
+          product.bank_name = '산업은행'
           break
         case '0010927':
           product.bank_name = '국민은행'
@@ -184,7 +183,7 @@ export default {
           product.bank_name = '농협은행'
           break
         case '0013909':
-          product.bank_name = 'KEB하나은행'
+          product.bank_name = '하나은행'
           break
         case '0014674':
           product.bank_name = '케이뱅크'

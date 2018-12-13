@@ -1,6 +1,6 @@
 <template>
   <div class="search-box">
-    <img class="search-icon" src="../../assets/logo.png">
+    <!-- <img class="search-icon" src="../../assets/logo.png"> -->
     <input class="search-text" type="text" placeholder="상품 이름을 입력해주세요." style="width: 90%;"
            v-model="keyword"
            @keypress.enter=search(keyword)>

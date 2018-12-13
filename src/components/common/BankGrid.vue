@@ -30,19 +30,21 @@ export default {
       this.$store.dispatch(Constant.SET_DEPOSIT_PRODUCT_LIST, payload)
     }
   },
-  data () {
-    return {
-      banks: this.$store.state.bankList.sort(function (a, b) {
+  computed: {
+    banks () {
+      // eslint-disable-next-line
+      return this.$store.state.bankList.sort(function (a, b) {
         return a.kor_co_nm < b.kor_co_nm ? -1 : a.kor_co_nm > b.kor_co_nm ? 1 : 0
       })
-    }
-  },
-  computed: {
+    },
     selectBanks () {
       return this.$store.state.selectBanks
     }
   },
   methods: {
+    sort (a, b) {
+      return a.kor_co_nm < b.kor_co_nm ? -1 : a.kor_co_nm > b.kor_co_nm ? 1 : 0
+    },
     select (finCoNo) {
       if (this.selectBanks.includes(finCoNo)) {
         this.selectBanks.splice(this.selectBanks.indexOf(finCoNo), 1)

@@ -2,8 +2,7 @@
   <nav style="position: relative; z-index: 10">
     <ul>
       <router-link tag="li" to="/" :style="{ cursor: 'pointer'}">
-        <img class="brand-logo" src="../../assets/logo.png" v-text="appName">
-        <span class="brand-name">{{appName}}</span>
+        올댓<b>뱅크</b> <span style="font-size: 8px">BETA</span>
       </router-link>
       <li><router-link to="/saving">적금</router-link></li>
       <li>
@@ -27,7 +26,6 @@ export default {
   name: 'AppHeader',
   data () {
     return {
-      appName: 'All That Bank',
       profileImg: require('../../assets/profile.png')
     }
   },
@@ -59,7 +57,9 @@ li {
 }
 
 li:first-child {
+  height: 52px;
   background: white;
+  padding: 15px;
 }
 
 /* li:last-child {
@@ -76,11 +76,6 @@ li a {
 
 li a:hover {
   background: #111;
-}
-
-.brand-logo {
-  width: 52px;
-  padding: 10px;
 }
 
 .brand-name {

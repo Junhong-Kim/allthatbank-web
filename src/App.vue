@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     initData () {
-      this.fbInit()
+      // this.fbInit()
       this.$store.dispatch(Constant.SET_BANK_LIST)
     },
     fbInit () {

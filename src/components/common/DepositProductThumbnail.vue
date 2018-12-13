@@ -1,12 +1,9 @@
 <template>
   <div class="product-thumbnail" @click="select">
-    <div class="bank-wrap">
-      <div><img class="logo" src="../../assets/logo.png"></div>
-      <div>{{product.bank_name}}</div>
-    </div>
     <div>
       <div class="option-wrap">
-        <div class="join-way">{{productJoinWay}}</div>
+        <!-- <div class="join-way">{{productJoinWay}}</div> -->
+        <div class="join-way">{{product.bank_name}}</div>
         <div class="product-name">{{product.product_name}}</div>
         <div>
           <span class="label rate-title">기본금리</span>
@@ -77,6 +74,7 @@ export default {
 }
 .option-wrap {
   float: left;
+  margin-left: 30px;
   margin-right: 50px;
   width: 30%;
 }
